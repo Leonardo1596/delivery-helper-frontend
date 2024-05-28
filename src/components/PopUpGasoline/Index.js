@@ -42,7 +42,7 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
             return;
         }
 
-        axios.put(`http://10.147.17.98:8000/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, { gasolina: Number(cost) })
+        axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, { gasolina: Number(cost) })
             .then(response => {
                 console.log(response.data);
 

@@ -21,7 +21,7 @@ const Index = (props) => {
 
     const hanleDeleteEntry = (item) => {
 
-        axios.delete(`http://10.147.17.98:8000/entry/delete/${props.userProfile._id}/${item._id}`)
+        axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${props.userProfile._id}/${item._id}`)
             .then(response => {
                 const updatedEntries = props.userProfile.entries.filter(entry => entry._id !== item._id);
                 const updatedUserProfile = { ...props.userProfile, entries: updatedEntries };

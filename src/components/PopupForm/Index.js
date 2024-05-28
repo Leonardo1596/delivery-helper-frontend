@@ -80,7 +80,7 @@ const Index = (props) => {
         // Copy userProfile
         const updatedUser = props.userProfile;
 
-        axios.post('http://10.147.17.98:8000/entry/create', body)
+        axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
             .then(response => {
                 console.log(response.data);
                 function setUpdatedUser() {

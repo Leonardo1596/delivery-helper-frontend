@@ -7,17 +7,9 @@ import Weeks from '../../components/Weeks/Index';
 import Card from '../../components/home-components/Card/Index';
 import SummaryBox from '../../components/home-components/SummaryBox/Index';
 import MaintenanceBox from '../../components/home-components/MaintenanceBox/Index';
-import PopUpGasoline from '../../components/PopUpGasoline/Index';
 
 const Home = () => {
   const userProfile = useSelector((state) => state.handleSetUser);
-
-  useEffect(() => {
-    if (userProfile.firstLoginOfWeek) {
-      setShowGasolineForm(true);
-    }
-  }, []);
-  
 
   // Get current date
   const today = new Date();

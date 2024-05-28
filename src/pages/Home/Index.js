@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 import { useSelector } from 'react-redux';
-import { startOfWeek, endOfWeek, format } from 'date-fns';
+import { startOfWeek, endOfWeek, format, parseISO, isWithinInterval } from 'date-fns';
 import Navbar from '../../components/Navbar/Index';
 import Weeks from '../../components/Weeks/Index';
 import Card from '../../components/home-components/Card/Index';
@@ -11,7 +11,6 @@ import PopUpGasoline from '../../components/PopUpGasoline/Index';
 
 const Home = () => {
   const userProfile = useSelector((state) => state.handleSetUser);
-  const [showGasolineForm, setShowGasolineForm] = useState(false);
 
   useEffect(() => {
     if (userProfile.firstLoginOfWeek) {
@@ -38,10 +37,10 @@ const Home = () => {
   };
 
   // Filter entries by date
-  const filterEntriesByDate = (entries, startDate, endDate) => {
+  const filterEntriesByDate = (entries,  startDate, endDate) => {
     return entries.filter(entry => {
-      const entryDate = new Date(entry.date);
-      return entryDate >= startDate && entryDate <= endDate;
+      const entryDate = parseISO(entry.date);
+      return isWithinInterval(entryDate, { start: startDate, end: endDate });
     });
   }
 
@@ -50,23 +49,7 @@ const Home = () => {
     ? filterEntriesByDate(userProfile.entries, selectedWeek.startDate, selectedWeek.endDate)
     : userProfile.entries;
 
-    // Calculate costPerKm total
-    function calculateCostPerKmTotal(obj) {
-      const fields = ['oleo', 'relacao', 'pneuDianteiro', 'pneuTraseiro', 'gasolina'];
-      let total = 0;
-
-      fields.forEach(field => {
-          if (obj[field] !== undefined) {
-              total += obj[field];
-          }
-      });
-
-      return total;
-  };
-
-  const totalCostPerKm = calculateCostPerKmTotal(userProfile.costPerKm[0]);
-
-
+  const totalCostPerKm = filteredEntries[0] ? filteredEntries[0].costPerKm : '';
   const totalGrossGain = filteredEntries.reduce((total, obj) => total + obj.grossGain, 0);
   const kmTraveled = filteredEntries.reduce((total, obj) => total + (obj.finalKm - obj.initialKm), 0);
   const expense = kmTraveled * Number(totalCostPerKm);
@@ -74,7 +57,6 @@ const Home = () => {
 
   return (
     <div>
-      {showGasolineForm && <PopUpGasoline userProfile={userProfile} setShowGasolineForm={setShowGasolineForm} />}
       <Navbar />
       <C.Content>
         <C.CardContainer>

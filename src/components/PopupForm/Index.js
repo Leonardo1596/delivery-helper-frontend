@@ -77,13 +77,12 @@ const Index = (props) => {
             costPerKm: calculateCostPerKmTotal(props.userProfile.costPerKm[0])
         };
 
-        console.log(body);
-
         // Copy userProfile
         const updatedUser = props.userProfile;
 
-        axios.post('http://10.147.17.98:8000/entrie/create', body)
+        axios.post('http://10.147.17.98:8000/entry/create', body)
             .then(response => {
+                console.log(response.data);
                 function setUpdatedUser() {
                     dispatch(setUser(''));
                     dispatch(setUser(updatedUser));

@@ -37,7 +37,10 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
 
     function updateGasolineValue() {
         const cost = (Number(formValues.value) / 35).toFixed(3);
-        console.log(cost);
+
+        if (formValues.value === 0) {
+            return;
+        }
 
         axios.put(`http://10.147.17.98:8000/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, { gasolina: Number(cost) })
             .then(response => {
@@ -53,6 +56,7 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
 
                 updatedUser.costPerKm[0].gasolina = response.data.gasolina
                 setUpdatedUser();
+                handleClosePopup();
             })
             .catch(error => {
                 console.log(error);
@@ -86,7 +90,7 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
                             />
                         </C.FormField>
                         <C.ButtonContainer>
-                            <C.Button onClick={updateGasolineValue}>Adicionar Lançamento</C.Button>
+                            <C.Button onClick={updateGasolineValue}>Alterar valor da gasolina</C.Button>
                         </C.ButtonContainer>
                     </C.Form>
                 </C.Box>

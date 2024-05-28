@@ -34,7 +34,7 @@ export const HamburgerIcon = styled.div`
     cursor: pointer;
 
     @media (max-width: 1024px) {
-        display: block;
+        display: flex;
     }
 
     @media (max-width: 768px) {
@@ -101,6 +101,7 @@ export const Icon = styled.button`
     justify-content: center;
     border: none;
     font-size: 23px;
+    background-color: transparent;
     cursor: pointer;
 `;
 

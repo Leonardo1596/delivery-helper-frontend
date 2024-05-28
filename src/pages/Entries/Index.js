@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 import { FaCirclePlus } from "react-icons/fa6";
-import { useDispatch, useSelector } from 'react-redux';
-import { startOfWeek, endOfWeek, format } from 'date-fns';
+import { useSelector } from 'react-redux';
+import { startOfWeek, endOfWeek, format, parseISO, isWithinInterval } from 'date-fns';
 import PopupForm from '../../components/PopupForm/Index';
 import Navbar from '../../components/Navbar/Index';
 import Table from '../../components/entries-components/Table/Index';
 import Weeks from '../../components/Weeks/Index';
+import PopUpGasoline from '../../components/PopUpGasoline/Index';
 
 const Index = () => {
-  const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const userProfile = useSelector((state) => state.handleSetUser);
+  const [showGasolineForm, setShowGasolineForm] = useState(false);
+
+  useEffect(() => {
+    if (userProfile.firstLoginOfWeek) {
+      setShowGasolineForm(true);
+    }
+  }, []);
 
 
   // Get current date
@@ -34,8 +41,8 @@ const Index = () => {
   // Filter entries by date
   const filterEntriesByDate = (entries, startDate, endDate) => {
     return entries.filter(entry => {
-      const entryDate = new Date(entry.date);
-      return entryDate >= startDate && entryDate <= endDate;
+      const entryDate = parseISO(entry.date);
+      return isWithinInterval(entryDate, { start: startDate, end: endDate });
     });
   }
 
@@ -44,12 +51,17 @@ const Index = () => {
     ? filterEntriesByDate(userProfile.entries, selectedWeek.startDate, selectedWeek.endDate)
     : userProfile.entries;
 
-    function handleOpenPopup() {
-      setShowPopup(true);
+  function handleOpenPopup() {
+    setShowPopup(true);
+  }
+
+  function handlePopupGasoline() {
+    setShowGasolineForm(true);
   }
 
   return (
     <div>
+      {showGasolineForm && <PopUpGasoline userProfile={userProfile} setShowGasolineForm={setShowGasolineForm} />}
       {showPopup && <PopupForm setShowPopup={setShowPopup} userProfile={userProfile} />}
       <Navbar />
       <C.Content>
@@ -58,11 +70,16 @@ const Index = () => {
           <C.Box>
             <C.HeaderContainer>
               <C.Header>Lançamentos diários</C.Header>
-              <C.AddIcon>
-                <FaCirclePlus onClick={handleOpenPopup} />
-              </C.AddIcon>
+              <C.ButtonsContainer>
+                <C.ButtonContainer>
+                  <C.Button onClick={handlePopupGasoline}>Atualizar valor da gasolina</C.Button>
+                </C.ButtonContainer>
+                <C.AddIcon>
+                  <FaCirclePlus onClick={handleOpenPopup} />
+                </C.AddIcon>
+              </C.ButtonsContainer>
             </C.HeaderContainer>
-            <Table tableData={filteredEntries} />
+            <Table userProfile={userProfile} tableData={filteredEntries} />
           </C.Box>
         </C.Container>
       </C.Content>

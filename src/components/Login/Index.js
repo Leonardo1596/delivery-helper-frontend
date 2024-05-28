@@ -55,7 +55,7 @@ const Index = (props) => {
         <C.LoginForm>
           <C.FormField>
             <C.FormLabel>Email</C.FormLabel>
-            <C.FormInput type="text" placeholder='@mail.com' ref={emailRef} onKeyPress={handleKeyPress} />
+            <C.FormInput type="email" placeholder='@mail.com' ref={emailRef} onKeyPress={handleKeyPress} />
           </C.FormField>
           <C.FormField style={{ marginBottom: '20px' }}>
             <C.FormLabel>Senha</C.FormLabel>

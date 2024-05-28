@@ -44,6 +44,12 @@ export const Header = styled.h2`
     font-size: 20px;
 `;
 
+export const ButtonsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const AddIcon = styled.button`
     font-size: 24px;
     display: flex;
@@ -66,4 +72,31 @@ export const Box = styled.div`
     0px 2px 1px -1px rgba(0,0,0,0.2),
     0px 1px 1px 0px rgba(0,0,0,0.14),
     0px 1px 3px 0px rgba(0,0,0,0.12);
+`;
+
+export const ButtonContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const Button = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-right: 20px;
+    border: none;
+    outline: none;
+    background-color: #3D8FE7;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #66A6F7;
+    }
 `;

@@ -45,7 +45,7 @@ export const Header = styled.h2`
     margin-bottom: 50px;
 
     @media (max-width: 600px) {
-        font-size: 18px;
+        font-size: 17px;
     }
 `;
 
@@ -82,6 +82,6 @@ export const Value = styled.span`
     font-size: 18px;
 
     @media (max-width: 600px) {
-        font-size: 16px;
+        font-size: 14px;
     }
 `;

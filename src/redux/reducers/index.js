@@ -6,7 +6,7 @@ import handleAddEntrie from './handleAddEntrie';
 const rootReducers = combineReducers({
     handleAuth,
     handleSetUser,
-    handleAddEntrie
+    handleAddEntrie,
 });
 
 export default rootReducers;

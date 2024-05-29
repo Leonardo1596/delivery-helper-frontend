@@ -47,6 +47,17 @@ const Home = () => {
   const expense = kmTraveled * Number(totalCostPerKm);
   const totalLiquidGain = totalGrossGain - expense;
 
+  let salary = Math.min(totalLiquidGain, userProfile.goals[0].salaryLimit);
+  let remaining = totalLiquidGain - salary;
+
+  let goal1 = Math.min(remaining, userProfile.goals[0].goal1Limit);
+  remaining -= goal1;
+
+  let goal2 = Math.min(remaining, userProfile.goals[0].goal2Limit);
+  remaining -= goal2;
+  
+
+
   return (
     <div>
       <Navbar />
@@ -54,10 +65,10 @@ const Home = () => {
         <C.CardContainer>
           <Weeks onSelectWeek={handleSelectWeek} />
           <C.GridCards>
-            <Card title="Salário" value={totalLiquidGain.toFixed(2).replace('.', ',')} />
-            <Card title="Playstation 5" value="0,00" />
-            <Card title="Décimo" value="0,00" />
-            <Card title="Restante" value="0,00" />
+            <Card title="Salário" value={salary.toFixed(2).replace('.', ',')} />
+            <Card title="Meta 1" value={goal1.toFixed(2).replace('.', ',')} />
+            <Card title="Meta 2" value={goal2.toFixed(2).replace('.', ',')} />
+            <Card title="Restante" value={remaining.toFixed(2).replace('.', ',')} />
           </C.GridCards>
           <C.MainContainer>
             <SummaryBox totalGrossGain={totalGrossGain} kmTraveled={kmTraveled} expense={expense} totalLiquidGain={totalLiquidGain} />

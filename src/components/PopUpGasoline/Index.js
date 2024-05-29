@@ -55,6 +55,7 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
                 const updatedUser = userProfile;
 
                 updatedUser.costPerKm[0].gasolina = response.data.gasolina
+                updatedUser.firstLoginOfWeek = false;
                 setUpdatedUser();
                 handleClosePopup();
             })
@@ -66,6 +67,12 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
     function handleClosePopup() {
         setShowGasolineForm(false);
     };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            updateGasolineValue();
+        }
+      };
     return (
         <div>
             <C.Container>
@@ -87,6 +94,7 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
                                 id='value'
                                 value={formValues.formattedValue}
                                 onChange={handleValueChange}
+                                onKeyPress={handleKeyPress}
                             />
                         </C.FormField>
                         <C.ButtonContainer>

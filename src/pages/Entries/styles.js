@@ -27,6 +27,7 @@ export const Container = styled.div`
     justify-content: center;
     flex-direction: column;
     margin-bottom: 30px;
+    max-width: 100vw;
 `;
 
 export const HeaderContainer = styled.div`
@@ -72,6 +73,7 @@ export const Box = styled.div`
     0px 2px 1px -1px rgba(0,0,0,0.2),
     0px 1px 1px 0px rgba(0,0,0,0.14),
     0px 1px 3px 0px rgba(0,0,0,0.12);
+
 `;
 
 export const ButtonContainer = styled.div`

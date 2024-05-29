@@ -20,7 +20,6 @@ const Index = (props) => {
     }
 
     const hanleDeleteEntry = (item) => {
-
         axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${props.userProfile._id}/${item._id}`)
             .then(response => {
                 const updatedEntries = props.userProfile.entries.filter(entry => entry._id !== item._id);

@@ -8,11 +8,13 @@ import Navbar from '../../components/Navbar/Index';
 import Table from '../../components/entries-components/Table/Index';
 import Weeks from '../../components/Weeks/Index';
 import PopUpGasoline from '../../components/PopUpGasoline/Index';
+import ConfirmPopup from '../../components/ConfirmPopup/Index';
 
 const Index = () => {
   const [showPopup, setShowPopup] = useState(false);
   const userProfile = useSelector((state) => state.handleSetUser);
   const [showGasolineForm, setShowGasolineForm] = useState(false);
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
   useEffect(() => {
     if (userProfile.firstLoginOfWeek) {
@@ -59,10 +61,25 @@ const Index = () => {
     setShowGasolineForm(true);
   }
 
+  const hanleDeleteEntry = (item) => {
+        // axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${props.userProfile._id}/${item._id}`)
+        //     .then(response => {
+        //         const updatedEntries = props.userProfile.entries.filter(entry => entry._id !== item._id);
+        //         const updatedUserProfile = { ...props.userProfile, entries: updatedEntries };
+                
+        //         dispatch(setUser(updatedUserProfile));
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
+        console.log(item);
+    };
+
   return (
     <div>
-      {showGasolineForm && <PopUpGasoline userProfile={userProfile} setShowGasolineForm={setShowGasolineForm} />}
-      {showPopup && <PopupForm setShowPopup={setShowPopup} userProfile={userProfile} />}
+      {showGasolineForm && <C.Overlay><PopUpGasoline userProfile={userProfile} setShowGasolineForm={setShowGasolineForm} /></C.Overlay>}
+      {showPopup && <C.Overlay><PopupForm setShowPopup={setShowPopup} userProfile={userProfile} /></C.Overlay>}
+      {showConfirmPopup && <C.Overlay><ConfirmPopup setShowConfirmPopup={setShowConfirmPopup} message="Tem certeza que deseja excluir o lançamento?" hanleDeleteEntry={hanleDeleteEntry} /></C.Overlay>}
       <Navbar />
       <C.Content>
         <Weeks onSelectWeek={handleSelectWeek} />
@@ -79,7 +96,7 @@ const Index = () => {
                 </C.AddIcon>
               </C.ButtonsContainer>
             </C.HeaderContainer>
-            <Table userProfile={userProfile} tableData={filteredEntries} />
+            <Table userProfile={userProfile} tableData={filteredEntries} setShowConfirmPopup={setShowConfirmPopup} />
           </C.Box>
         </C.Container>
       </C.Content>

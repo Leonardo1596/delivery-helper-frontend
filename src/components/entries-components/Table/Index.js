@@ -19,17 +19,21 @@ const Index = (props) => {
         console.log(item);
     }
 
-    const hanleDeleteEntry = (item) => {
-        axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${props.userProfile._id}/${item._id}`)
-            .then(response => {
-                const updatedEntries = props.userProfile.entries.filter(entry => entry._id !== item._id);
-                const updatedUserProfile = { ...props.userProfile, entries: updatedEntries };
+    // const hanleDeleteEntry = (item) => {
+    //     axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${props.userProfile._id}/${item._id}`)
+    //         .then(response => {
+    //             const updatedEntries = props.userProfile.entries.filter(entry => entry._id !== item._id);
+    //             const updatedUserProfile = { ...props.userProfile, entries: updatedEntries };
                 
-                dispatch(setUser(updatedUserProfile));
-            })
-            .catch(error => {
-                console.log(error);
-            });
+    //             dispatch(setUser(updatedUserProfile));
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    // };
+
+    const handleDeleteButton = (item) => {
+        props.setShowConfirmPopup(true);
     };
 
     return (
@@ -60,7 +64,7 @@ const Index = (props) => {
                             <C.TableCell>{(item.percentageSpent.toFixed(2).replace('.', ','))}%</C.TableCell>
                             <C.TableCell>
                                 <FaPencil id="update-icon" style={{ marginRight: '10px' }} onClick={() => hanleUpdateEntry(item)} />
-                                <FaRegTrashCan id="delete-icon" onClick={() => hanleDeleteEntry(item)} />
+                                <FaRegTrashCan id="delete-icon" onClick={() => handleDeleteButton(item)} />
                             </C.TableCell>
                         </tr>
                     ))}

@@ -39,6 +39,10 @@ export const CloseIcon = styled.button`
     outline: none;
     background-color: transparent;
     cursor: pointer;
+
+    &:hover {
+        color: #F44336;;
+    }
 `;
 
 export const Form = styled.div`

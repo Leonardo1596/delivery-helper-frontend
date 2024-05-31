@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
+import axios from 'axios';
 import { FaCirclePlus } from "react-icons/fa6";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../redux/action';
 import { startOfWeek, endOfWeek, format, parseISO, isWithinInterval } from 'date-fns';
 import PopupForm from '../../components/PopupForm/Index';
 import Navbar from '../../components/Navbar/Index';
@@ -11,9 +13,11 @@ import PopUpGasoline from '../../components/PopUpGasoline/Index';
 import ConfirmPopup from '../../components/ConfirmPopup/Index';
 
 const Index = () => {
+  const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
   const userProfile = useSelector((state) => state.handleSetUser);
   const [showGasolineForm, setShowGasolineForm] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
   useEffect(() => {
@@ -61,19 +65,26 @@ const Index = () => {
     setShowGasolineForm(true);
   }
 
-  const hanleDeleteEntry = (item) => {
-        // axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${props.userProfile._id}/${item._id}`)
-        //     .then(response => {
-        //         const updatedEntries = props.userProfile.entries.filter(entry => entry._id !== item._id);
-        //         const updatedUserProfile = { ...props.userProfile, entries: updatedEntries };
-                
-        //         dispatch(setUser(updatedUserProfile));
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
-        console.log(item);
-    };
+  const handleShowConfirmPopup = (item) => {
+    setItemToDelete(item);
+    setShowConfirmPopup(true);
+  };
+
+  const hanleDeleteEntry = () => {
+    if (itemToDelete) {
+      axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${userProfile._id}/${itemToDelete._id}`)
+        .then(response => {
+          const updatedEntries = userProfile.entries.filter(entry => entry._id !== itemToDelete._id);
+          const updatedUserProfile = { ...userProfile, entries: updatedEntries };
+
+          dispatch(setUser(updatedUserProfile));
+          setShowConfirmPopup(false);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <div>
@@ -96,7 +107,7 @@ const Index = () => {
                 </C.AddIcon>
               </C.ButtonsContainer>
             </C.HeaderContainer>
-            <Table userProfile={userProfile} tableData={filteredEntries} setShowConfirmPopup={setShowConfirmPopup} />
+            <Table userProfile={userProfile} tableData={filteredEntries} handleShowConfirmPopup={handleShowConfirmPopup} />
           </C.Box>
         </C.Container>
       </C.Content>

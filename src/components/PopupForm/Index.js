@@ -82,7 +82,6 @@ const Index = (props) => {
 
         axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
             .then(response => {
-                console.log(response.data);
                 function setUpdatedUser() {
                     dispatch(setUser(''));
                     dispatch(setUser(updatedUser));

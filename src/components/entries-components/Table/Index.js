@@ -7,8 +7,6 @@ import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
 import { useDispatch } from 'react-redux';
 
 const Index = (props) => {    
-    const dispatch = useDispatch();
-
     // Format date
     function formatDate(dateString) {
         const date = parseISO(dateString);
@@ -19,21 +17,8 @@ const Index = (props) => {
         console.log(item);
     }
 
-    // const hanleDeleteEntry = (item) => {
-    //     axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${props.userProfile._id}/${item._id}`)
-    //         .then(response => {
-    //             const updatedEntries = props.userProfile.entries.filter(entry => entry._id !== item._id);
-    //             const updatedUserProfile = { ...props.userProfile, entries: updatedEntries };
-                
-    //             dispatch(setUser(updatedUserProfile));
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    // };
-
     const handleDeleteButton = (item) => {
-        props.setShowConfirmPopup(true);
+        props.handleShowConfirmPopup(item);
     };
 
     return (

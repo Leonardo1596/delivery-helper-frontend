@@ -50,7 +50,8 @@ const Index = (props) => {
 
                     <C.Dropdown className='dropdown'>
                         <C.DropdownContainer>
-                            <C.DropdownItem><a href="">Perfil</a></C.DropdownItem>
+                            {/* <C.DropdownItem><a href="">Perfil</a></C.DropdownItem> */}
+                            <C.DropdownItem><a href="/configuracoes">Configurações</a></C.DropdownItem>
                             <C.DropdownItem onClick={handleLogout}>Deslogar</C.DropdownItem>
                         </C.DropdownContainer>
                     </C.Dropdown>

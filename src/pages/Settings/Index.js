@@ -22,7 +22,7 @@ const Index = () => {
   };
 
   function saveUpdate(update) {
-    axios.put(`https://delivery-helper-backend.onrender.com//update/user/${userProfile._id}`, update)
+    axios.put(`https://delivery-helper-backend.onrender.com/update/user/${userProfile._id}`, update)
       .then(response => {
         console.log(response.data);
       })

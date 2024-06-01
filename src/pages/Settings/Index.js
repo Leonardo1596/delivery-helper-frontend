@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as C from './styles'
 import axios from 'axios';
 import Navbar from '../../components/Navbar/Index';
-import Goals from '../../components/settings-components/Goals/Index';
+import Profile from '../../components/settings-components/Profile/Index';
 import { useSelector } from 'react-redux';
 
 const Index = () => {
-  const userProfile = useSelector((state) => state.handleSetUser);
+  const userId = useSelector((state) => state.handleSetUserId);
+  const [userProfile, setUserProfile] = useState('');
   const [activeContent, setActiveContent] = useState('Perfil');
+
+  function getUserInfo() {
+    axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
+      .then(response => {
+        // console.log(response.data);
+        setUserProfile(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   const handleContentChange = (content) => {
     setActiveContent(content);
@@ -22,7 +38,7 @@ const Index = () => {
   };
 
   function saveUpdate(update) {
-    axios.put(`https://delivery-helper-backend.onrender.com/update/user/${userProfile._id}`, update)
+    axios.put(`https://delivery-helper-backend.onrender.com/update/user/${userId}`, update)
       .then(response => {
         console.log(response.data);
       })
@@ -62,7 +78,7 @@ const Index = () => {
                 </C.HeaderButton>
               </C.MenuHeader>
             </C.MenuHeaderContainer>
-            {activeContent === 'Perfil' && <Goals userProfile={userProfile} saveUpdate={saveUpdate} />}
+            {activeContent === 'Perfil' && <Profile userProfile={userProfile} saveUpdate={saveUpdate} />}
             {activeContent === 'Metas' && <ContentMetas />}
             {activeContent === 'CustoPorKm' && <ContentCustoPorKm />}
           </C.Box>

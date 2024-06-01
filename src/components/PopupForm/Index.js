@@ -73,7 +73,7 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
             costPerKm: calculateCostPerKmTotal(userProfile.costPerKm[0])
         };
 
-        axios.post('http://localhost:8000/entry/create', body)
+        axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
             .then(response => {
                 getUserInfo();
                 handleClosePopup();

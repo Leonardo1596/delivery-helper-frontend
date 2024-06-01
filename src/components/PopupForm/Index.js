@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import * as C from './styles';
 import axios from 'axios';
 import { FaXmark } from "react-icons/fa6";
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/action';
 
-
-const Index = (props) => {
-    const dispatch = useDispatch();
+const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
@@ -69,29 +65,18 @@ const Index = (props) => {
 
     function addEntrie() {
         let body = {
-            userId: props.userProfile._id,
+            userId: userProfile._id,
             date: formValues.date,
             initialKm: Number(formValues.initialKm),
             finalKm: Number(formValues.finalKm),
             grossGain: Number(formValues.value),
-            costPerKm: calculateCostPerKmTotal(props.userProfile.costPerKm[0])
+            costPerKm: calculateCostPerKmTotal(userProfile.costPerKm[0])
         };
 
-        // Copy userProfile
-        const updatedUser = props.userProfile;
-
-        axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
+        axios.post('http://localhost:8000/entry/create', body)
             .then(response => {
-                function setUpdatedUser() {
-                    dispatch(setUser(''));
-                    dispatch(setUser(updatedUser));
-                }
-
-                updatedUser.entries.push(response.data);
-                setUpdatedUser();
-
+                getUserInfo();
                 handleClosePopup();
-                // location.reload();
             })
             .catch(error => {
                 console.log(error)
@@ -99,7 +84,7 @@ const Index = (props) => {
     }
 
     function handleClosePopup() {
-        props.setShowPopup(false)
+        setShowPopup(false)
     }
 
     return (

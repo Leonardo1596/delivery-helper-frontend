@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 import axios from 'axios';
 import { FaCirclePlus } from "react-icons/fa6";
-import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../redux/action';
+import { useSelector } from 'react-redux';
 import { startOfWeek, endOfWeek, format, parseISO, isWithinInterval } from 'date-fns';
 import PopupForm from '../../components/PopupForm/Index';
 import Navbar from '../../components/Navbar/Index';
@@ -13,14 +12,28 @@ import PopUpGasoline from '../../components/PopUpGasoline/Index';
 import ConfirmPopup from '../../components/ConfirmPopup/Index';
 
 const Index = () => {
-  const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
-  const userProfile = useSelector((state) => state.handleSetUser);
+  const [userProfile, setUserProfile] = useState('');
+  const userId = useSelector((state) => state.handleSetUserId);
+
   const [showGasolineForm, setShowGasolineForm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
+  function getUserInfo() {
+    axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
+      .then(response => {
+        // console.log(response.data);
+        setUserProfile(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
+    getUserInfo();
+
     if (userProfile.firstLoginOfWeek) {
       setShowGasolineForm(true);
     }
@@ -53,9 +66,9 @@ const Index = () => {
   }
 
   // Filters entries if a week is selected
-  const filteredEntries = selectedWeek
+  const filteredEntries = userProfile && (selectedWeek
     ? filterEntriesByDate(userProfile.entries, selectedWeek.startDate, selectedWeek.endDate)
-    : userProfile.entries;
+    : userProfile.entries);
 
   function handleOpenPopup() {
     setShowPopup(true);
@@ -74,10 +87,7 @@ const Index = () => {
     if (itemToDelete) {
       axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${userProfile._id}/${itemToDelete._id}`)
         .then(response => {
-          const updatedEntries = userProfile.entries.filter(entry => entry._id !== itemToDelete._id);
-          const updatedUserProfile = { ...userProfile, entries: updatedEntries };
-
-          dispatch(setUser(updatedUserProfile));
+          getUserInfo();
           setShowConfirmPopup(false);
         })
         .catch(error => {
@@ -88,8 +98,8 @@ const Index = () => {
 
   return (
     <div>
-      {showGasolineForm && <C.Overlay><PopUpGasoline userProfile={userProfile} setShowGasolineForm={setShowGasolineForm} /></C.Overlay>}
-      {showPopup && <C.Overlay><PopupForm setShowPopup={setShowPopup} userProfile={userProfile} /></C.Overlay>}
+      {showGasolineForm && <C.Overlay><PopUpGasoline userProfile={userProfile} setShowGasolineForm={setShowGasolineForm} getUserInfo={getUserInfo} /></C.Overlay>}
+      {showPopup && <C.Overlay><PopupForm setShowPopup={setShowPopup} userProfile={userProfile} getUserInfo={getUserInfo} /></C.Overlay>}
       {showConfirmPopup && <C.Overlay><ConfirmPopup setShowConfirmPopup={setShowConfirmPopup} message="Tem certeza que deseja excluir o lançamento?" hanleDeleteEntry={hanleDeleteEntry} /></C.Overlay>}
       <Navbar />
       <C.Content>

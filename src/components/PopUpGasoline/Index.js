@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 import { FaXmark } from "react-icons/fa6";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/action';
 
-const Index = ({ userProfile, setShowGasolineForm }) => {
-    const dispatch = useDispatch();
+const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
 
     const [formValues, setFormValues] = useState({
         value: 0,
@@ -42,21 +40,9 @@ const Index = ({ userProfile, setShowGasolineForm }) => {
             return;
         }
 
-        axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, { gasolina: Number(cost) })
+        axios.put(`http://localhost:8000/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, { gasolina: Number(cost) })
             .then(response => {
-                console.log(response.data);
-
-                function setUpdatedUser() {
-                    dispatch(setUser(''));
-                    dispatch(setUser(updatedUser));
-                }
-
-                // Copy userProfile
-                const updatedUser = userProfile;
-
-                updatedUser.costPerKm[0].gasolina = response.data.gasolina
-                updatedUser.firstLoginOfWeek = false;
-                setUpdatedUser();
+                getUserInfo();
                 handleClosePopup();
             })
             .catch(error => {

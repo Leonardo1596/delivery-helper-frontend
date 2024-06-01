@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import * as C from './styles';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setAuth, setUser } from '../../redux/action';
+import { setAuth, setUserId } from '../../redux/action';
 
-const Index = (props) => {
+const Index = () => {
   const dispatch = useDispatch();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -31,7 +31,7 @@ const Index = (props) => {
 
         showError();
         dispatch(setAuth(true));
-        dispatch(setUser(response.data.userInfo));
+        dispatch(setUserId(response.data.userInfo._id))
         window.location.href = '/inicio'
       })
       .catch(err => {

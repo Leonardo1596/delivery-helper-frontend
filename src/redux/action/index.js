@@ -6,11 +6,10 @@ export const setAuth = (auth) => {
     }
 }
 
-// For save user info
-export const setUser = (user) => {
+export const setUserId = (id) => {
     return {
-        type: 'SETUSER',
-        payload: user
+        type: 'SETUSERID',
+        payload: id
     }
 }
 

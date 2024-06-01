@@ -1,7 +1,7 @@
 import React from 'react';
 import * as C from './styles';
 
-const Index = ({ totalGrossGain, kmTraveled, expense, totalLiquidGain }) => {
+const Index = ({ userProfile, totalGrossGain, kmTraveled, expense, totalLiquidGain }) => {
     return (
         <div>
             <C.Box>
@@ -10,7 +10,7 @@ const Index = ({ totalGrossGain, kmTraveled, expense, totalLiquidGain }) => {
                     <C.List>
                         <C.Item>
                             <C.Title>Salário bruto</C.Title>
-                            <C.Value>R$ {totalGrossGain.toFixed(2).replace('.', ',')}</C.Value>
+                            <C.Value>R$ {userProfile && totalGrossGain.toFixed(2).replace('.', ',')}</C.Value>
                         </C.Item>
                         <C.Item>
                             <C.Title>Salário liquido</C.Title>

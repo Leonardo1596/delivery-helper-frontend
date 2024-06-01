@@ -1,12 +1,9 @@
 import React from 'react';
 import * as C from './styles';
-import axios from 'axios';
-import { setUser } from '../../../redux/action';
 import { format, parseISO } from 'date-fns';
 import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
-import { useDispatch } from 'react-redux';
 
-const Index = (props) => {    
+const Index = ({ userProfile, tableData, handleShowConfirmPopup }) => {    
     // Format date
     function formatDate(dateString) {
         const date = parseISO(dateString);
@@ -18,7 +15,7 @@ const Index = (props) => {
     }
 
     const handleDeleteButton = (item) => {
-        props.handleShowConfirmPopup(item);
+        handleShowConfirmPopup(item);
     };
 
     return (
@@ -38,7 +35,7 @@ const Index = (props) => {
                 </thead>
 
                 <tbody>
-                    {props.tableData.map((item, index) => (
+                    {userProfile && tableData.map((item, index) => (
                         <tr key={index}>
                             <C.TableCell>{item.weekDay}</C.TableCell>
                             <C.TableCell>{formatDate(item.date)}</C.TableCell>

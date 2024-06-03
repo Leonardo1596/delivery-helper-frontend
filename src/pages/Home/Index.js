@@ -17,7 +17,7 @@ const Home = () => {
   function getUserInfo() {
     axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
       .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
         setUserProfile(response.data);
       })
       .catch(error => {

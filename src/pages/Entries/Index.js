@@ -33,10 +33,6 @@ const Index = () => {
 
   useEffect(() => {
     getUserInfo();
-
-    if (userProfile.firstLoginOfWeek) {
-      setShowGasolineForm(true);
-    }
   }, []);
 
 

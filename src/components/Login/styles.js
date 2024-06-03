@@ -77,6 +77,9 @@ export const Link = styled.a`
 `;
 
 export const LoginButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 50px;
     background-color: #3D8FE7;
@@ -87,6 +90,11 @@ export const LoginButton = styled.button`
     margin: 10px 0;
     outline: none;
     cursor: pointer;
+
+    img {
+        width: 27px;
+        height: 27px;
+    }
 
     &:hover {
         background-color: #3072b8;

@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import * as C from './styles';
 import axios from 'axios';
 import { FaXmark } from "react-icons/fa6";
+import gifLoading from '../../assets/gif/loading-gif.gif';
 
 const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
+  const [loading, setLoading] = useState(false);
+
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
@@ -64,6 +67,7 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
 
 
     function addEntrie() {
+        setLoading(true);
         let body = {
             userId: userProfile._id,
             date: formValues.date,
@@ -123,7 +127,9 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
                             />
                         </C.FormField>
                         <C.ButtonContainer>
-                            <C.Button onClick={addEntrie}>Adicionar Lançamento</C.Button>
+                            <C.Button onClick={addEntrie}>
+                                {loading ? <img src={gifLoading} /> : 'Adicionar Lançamento'}
+                            </C.Button>
                         </C.ButtonContainer>
                     </C.Form>
                 </C.Box>

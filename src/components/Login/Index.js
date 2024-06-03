@@ -1,15 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import * as C from './styles';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setAuth, setUserId } from '../../redux/action';
+import gifLoading from '../../assets/gif/loading-gif.gif';
 
 const Index = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
   function handleLogin() {
+    setLoading(true);
+
     let body = {
       email: emailRef.current.value,
       password: passwordRef.current.value
@@ -20,8 +24,9 @@ const Index = () => {
         function showError() {
           const errorContainer = document.querySelector('.errorContainer');
           const error = document.querySelector('.error');
-  
+
           if (response.data.token === undefined) {
+            setLoading(false);
             errorContainer.style.display = 'flex';
             error.innerText = response.data.message;
             return;
@@ -31,7 +36,7 @@ const Index = () => {
 
         showError();
         dispatch(setAuth(true));
-        dispatch(setUserId(response.data.userInfo._id))
+        dispatch(setUserId(response.data.userInfo._id));
         window.location.href = '/inicio'
       })
       .catch(err => {
@@ -62,7 +67,9 @@ const Index = () => {
             <C.FormInput type="password" placeholder='senha' ref={passwordRef} onKeyPress={handleKeyPress} />
           </C.FormField>
           <C.Link href="#" style={{ textDecoration: 'none' }}>Esqueceu sua senha?</C.Link>
-          <C.LoginButton onClick={handleLogin}>Entrar</C.LoginButton>
+          <C.LoginButton onClick={handleLogin}>
+            {loading ? <img src={gifLoading} /> : 'Entrar'}
+          </C.LoginButton>
           <C.errorContainer className='errorContainer'>
             <span className='error'></span>
           </C.errorContainer>

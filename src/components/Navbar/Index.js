@@ -1,7 +1,7 @@
 import React from 'react';
 import * as C from './styles';
 import { useDispatch } from 'react-redux';
-import { setAuth } from '../../redux/action';
+import { setAuth, setUserId } from '../../redux/action';
 import { FaRegCircleUser, FaBars } from "react-icons/fa6";
 
 const Index = (props) => {
@@ -27,6 +27,7 @@ const Index = (props) => {
 
     const handleLogout = () => {
         dispatch(setAuth(false));
+        dispatch(setUserId(''));
     }
 
     return (

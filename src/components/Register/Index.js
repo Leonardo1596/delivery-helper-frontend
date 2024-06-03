@@ -1,8 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import * as C from './styles';
 import axios from 'axios';
+import gifLoading from '../../assets/gif/loading-gif.gif';
+import { setAuth, setUserId } from '../../redux/action';
+import { useDispatch } from 'react-redux';
 
 const Index = (props) => {
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
   const emailRef = useRef(null);
   const usernameRef = useRef(null)
   const passwordRef = useRef(null);
@@ -11,6 +17,7 @@ const Index = (props) => {
   // Validate form
 
   function handleRegister() {
+    setLoading(true)
     let body = {
       email: emailRef.current.value,
       username: usernameRef.current.value,
@@ -21,6 +28,9 @@ const Index = (props) => {
     axios.post('https://delivery-helper-backend.onrender.com/auth/sign-up', body)
       .then(response => {
         console.log(response.data);
+        dispatch(setAuth(true));
+        dispatch(setUserId(response.data.userProfile._id));
+        window.location.href = '/inicio'
       })
       .catch(err => {
         console.log(err);
@@ -50,7 +60,9 @@ const Index = (props) => {
               <C.FormLabel>Confirmar senha</C.FormLabel>
               <C.FormInput type="password" placeholder='confirmar senha' ref={confirmPasswordRef} />
             </C.FormField>
-            <C.RegisterButton onClick={handleRegister}>Cadastrar</C.RegisterButton>
+            <C.RegisterButton onClick={handleRegister}>
+              {loading ? <img src= {gifLoading} /> : 'Cadastrar'}
+            </C.RegisterButton>
             <C.errorContainer className='errorContainer'>
               <span className='error'></span>
             </C.errorContainer>

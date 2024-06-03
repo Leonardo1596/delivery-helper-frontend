@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as C from './styles';
 import { FaXmark } from "react-icons/fa6";
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import gifLoading from '../../assets/gif/loading-gif.gif';
 
 const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
+    const[loading, setLoading] = useState(false);
 
     const [formValues, setFormValues] = useState({
         value: 0,
@@ -34,6 +35,7 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
     };
 
     function updateGasolineValue() {
+        setLoading(true);
         const cost = (Number(formValues.value) / 35).toFixed(3);
 
         if (formValues.value === 0) {
@@ -42,6 +44,7 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
 
         axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, { gasolina: Number(cost) })
             .then(response => {
+                console.log(response.data)
                 getUserInfo();
                 handleClosePopup();
             })
@@ -58,7 +61,7 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
         if (event.key === 'Enter') {
             updateGasolineValue();
         }
-      };
+    };
     return (
         <div>
             <C.Container>
@@ -84,7 +87,9 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
                             />
                         </C.FormField>
                         <C.ButtonContainer>
-                            <C.Button onClick={updateGasolineValue}>Alterar valor da gasolina</C.Button>
+                            <C.Button onClick={updateGasolineValue}>
+                                {loading ? <img src={gifLoading} /> : 'Alterar valor da gasolina'}
+                            </C.Button>
                         </C.ButtonContainer>
                     </C.Form>
                 </C.Box>

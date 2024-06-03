@@ -93,6 +93,7 @@ export const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 50%;
     height: 35px;
     border-radius: 25px;
     padding: 10px 20px;
@@ -102,6 +103,11 @@ export const Button = styled.button`
     color: #fff;
     font-size: 13px;
     cursor: pointer;
+    
+    img {
+        width: 23px;
+        height: 23px;
+    }
 
     &:hover {
         background-color: #66A6F7;

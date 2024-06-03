@@ -27,7 +27,7 @@ const Index = (props) => {
 
     axios.post('https://delivery-helper-backend.onrender.com/auth/sign-up', body)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch(setAuth(true));
         dispatch(setUserId(response.data.userProfile._id));
         window.location.href = '/inicio'

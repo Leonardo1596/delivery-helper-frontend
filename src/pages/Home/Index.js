@@ -17,18 +17,18 @@ const Home = () => {
   function getUserInfo() {
     axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setUserProfile(response.data);
       })
       .catch(error => {
         console.log(error);
       });
   };
-  
+
   useEffect(() => {
     getUserInfo();
   }, []);
-  
+
 
   // Get current date
   const today = new Date();
@@ -48,7 +48,7 @@ const Home = () => {
   };
 
   // Filter entries by date
-  const filterEntriesByDate = (entries,  startDate, endDate) => {
+  const filterEntriesByDate = (entries, startDate, endDate) => {
     return entries.filter(entry => {
       const entryDate = parseISO(entry.date);
       return isWithinInterval(entryDate, { start: startDate, end: endDate });
@@ -74,7 +74,7 @@ const Home = () => {
 
   let goal2 = userProfile && Math.min(remaining, userProfile.goals[0].goal2Limit);
   remaining -= goal2;
-  
+
 
 
   return (
@@ -84,14 +84,14 @@ const Home = () => {
         <C.CardContainer>
           <Weeks onSelectWeek={handleSelectWeek} />
           <C.GridCards>
-            <Card title="Salário" value={userProfile && salary.toFixed(2).replace('.', ',')} />
-            <Card title="Meta 1" value={userProfile && goal1.toFixed(2).replace('.', ',')} />
-            <Card title="Meta 2" value={userProfile && goal2.toFixed(2).replace('.', ',')} />
-            <Card title="Restante" value={userProfile && remaining.toFixed(2).replace('.', ',')} />
+            <Card userProfile={userProfile} title="Salário" value={userProfile && salary.toFixed(2).replace('.', ',')} />
+            <Card userProfile={userProfile} title="Meta 1" value={userProfile && goal1.toFixed(2).replace('.', ',')} />
+            <Card userProfile={userProfile} title="Meta 2" value={userProfile && goal2.toFixed(2).replace('.', ',')} />
+            <Card userProfile={userProfile} title="Restante" value={userProfile && remaining.toFixed(2).replace('.', ',')} />
           </C.GridCards>
           <C.MainContainer>
             <SummaryBox userProfile={userProfile} totalGrossGain={userProfile && totalGrossGain} kmTraveled={kmTraveled} expense={expense} totalLiquidGain={totalLiquidGain} />
-            <MaintenanceBox costPerKm={userProfile && userProfile.costPerKm[0]} kmTraveled={kmTraveled} />
+            <MaintenanceBox userProfile={userProfile} costPerKm={userProfile && userProfile.costPerKm[0]} kmTraveled={kmTraveled} />
           </C.MainContainer>
         </C.CardContainer>
       </C.Content>

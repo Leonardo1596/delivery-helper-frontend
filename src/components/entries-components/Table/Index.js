@@ -1,9 +1,11 @@
 import React from 'react';
 import * as C from './styles';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 import { format, parseISO } from 'date-fns';
 import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
 
-const Index = ({ userProfile, tableData, handleShowConfirmPopup }) => {    
+const Index = ({ userProfile, tableData, handleShowConfirmPopup }) => {
     // Format date
     function formatDate(dateString) {
         const date = parseISO(dateString);
@@ -35,7 +37,7 @@ const Index = ({ userProfile, tableData, handleShowConfirmPopup }) => {
                 </thead>
 
                 <tbody>
-                    {userProfile && tableData.map((item, index) => (
+                    {userProfile ? tableData.map((item, index) => (
                         <tr key={index}>
                             <C.TableCell>{item.weekDay}</C.TableCell>
                             <C.TableCell>{formatDate(item.date)}</C.TableCell>
@@ -49,7 +51,20 @@ const Index = ({ userProfile, tableData, handleShowConfirmPopup }) => {
                                 <FaRegTrashCan id="delete-icon" onClick={() => handleDeleteButton(item)} />
                             </C.TableCell>
                         </tr>
-                    ))}
+                    )) : (
+                        Array.from({ length: 4 }).map((_, index) => (
+                        <tr key={index}>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                        </tr>
+                        ))
+                    )}
                 </tbody>
             </C.Table>
         </div>

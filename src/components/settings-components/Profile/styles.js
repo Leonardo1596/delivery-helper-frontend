@@ -7,6 +7,10 @@ export const Content = styled.div`
     width: 100%;
     margin-bottom: 30px;
     padding: 0 60px;
+
+    @media (max-width: 480px) {
+        padding: 0 40px;
+    }
 `;
 
 export const Container = styled.div`
@@ -36,6 +40,20 @@ export const Form = styled.div`
    flex-direction: column;
    margin-top: 60px;
    padding: 0 20px;
+
+   @media (max-width: 590px) {
+        width: 320px;
+    }
+
+    @media (max-width: 590px) {
+        width: 250px;
+        padding: 0 5px;
+    }
+
+    @media (max-width: 400px) {
+        width: 220px;
+        padding: 0 5px;
+    }
 `;
 
 export const FormField = styled.div`

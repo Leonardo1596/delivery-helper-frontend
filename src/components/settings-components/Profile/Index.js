@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 
 const Index = ({ userProfile, saveUpdate }) => {
@@ -11,10 +11,21 @@ const Index = ({ userProfile, saveUpdate }) => {
     };
 
     const [formValues, setFormValues] = useState({
-        email: userProfile.email,
-        username: userProfile.username,
+        email: '',
+        username: '',
         password: '',
     });
+
+    useEffect(() => {
+      if (userProfile) {
+        setFormValues({
+            email: userProfile.email || '',
+            username: userProfile.username || '',
+            password: '',
+        });
+      }
+    }, [userProfile]);
+    
 
     function handleSaveButton() {
         saveUpdate(formValues);
@@ -29,11 +40,11 @@ const Index = ({ userProfile, saveUpdate }) => {
                     <C.Form>
                         <C.FormField>
                             <C.Label>Email</C.Label>
-                            <C.Input type="email" id="email" value={formValues.email} onChange={handleChange} />
+                            {!userProfile ? <C.Input type="email" disabled={true} /> : <C.Input type="email" id="email" value={formValues.email} onChange={handleChange} />}                  
                         </C.FormField>
                         <C.FormField>
                             <C.Label>Nome de usuário</C.Label>
-                            <C.Input type="text" id="username" value={formValues.username} onChange={handleChange} />
+                            {!userProfile ? <C.Input type="text" disabled={true} /> :<C.Input type="text" id="username" value={formValues.username} onChange={handleChange} />}
                         </C.FormField>
                         {/* <C.FormField>
                             <C.Label>Senha</C.Label>

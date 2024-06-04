@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as C from './styles'
 import axios from 'axios';
 import Navbar from '../../components/Navbar/Index';
@@ -9,6 +9,8 @@ const Index = () => {
   const userId = useSelector((state) => state.handleSetUserId);
   const [userProfile, setUserProfile] = useState('');
   const [activeContent, setActiveContent] = useState('Perfil');
+  const [highlighterStyle, setHighlighterStyle] = useState({});
+  const menuHeaderRef = useRef(null);
 
   function getUserInfo() {
     axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
@@ -24,6 +26,18 @@ const Index = () => {
   useEffect(() => {
     getUserInfo();
   }, []);
+
+  useEffect(() => {
+    if (menuHeaderRef.current) {
+      const activeButton = menuHeaderRef.current.querySelector('.selected');
+      if (activeButton) {
+        setHighlighterStyle({
+          width: `${activeButton.offsetWidth}px`,
+          left: `${activeButton.offsetLeft}px`
+        });
+      }
+    }
+  }, [activeContent]);
 
   const handleContentChange = (content) => {
     setActiveContent(content);
@@ -57,7 +71,8 @@ const Index = () => {
               <C.Header>Configurações</C.Header>
             </C.HeaderContainer>
             <C.MenuHeaderContainer>
-              <C.MenuHeader>
+              <C.MenuHeader ref={menuHeaderRef}>
+              <C.Highlighter style={highlighterStyle} />
                 <C.HeaderButton
                   onClick={() => handleContentChange('Perfil')}
                   className={activeContent === 'Perfil' ? 'selected' : ''}

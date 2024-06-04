@@ -14,28 +14,28 @@ const Index = ({ userProfile, totalGrossGain, kmTraveled, expense, totalLiquidGa
                             <C.Title>Salário bruto</C.Title>
                             <C.Value>
                                 {/* {`R$ ${userProfile && totalGrossGain.toFixed(2).replace('.', ',')}`} */}
-                                {userProfile ? `R$ ${totalGrossGain.toFixed(2).replace('.', ',')}` : <Skeleton width={100} />}
+                                {userProfile ? `R$ ${totalGrossGain.toFixed(2).replace('.', ',')}` : <Skeleton style={{ borderRadius: '5px' }} width={100} />}
                             </C.Value>
                         </C.Item>
                         <C.Item>
                             <C.Title>Salário liquido</C.Title>
                             <C.Value>
                                 {/* R$ {totalLiquidGain.toFixed(2).replace('.', ',')} */}
-                                {userProfile ? `R$ ${totalLiquidGain.toFixed(2).replace('.', ',')}` : <Skeleton width={100} />}
+                                {userProfile ? `R$ ${totalLiquidGain.toFixed(2).replace('.', ',')}` : <Skeleton style={{ borderRadius: '5px' }} width={100} />}
                             </C.Value>
                         </C.Item>
                         <C.Item>
                             <C.Title>Km rodado</C.Title>
                             <C.Value>
                                 {/* {kmTraveled}km */}
-                                {userProfile ? `${kmTraveled}km` : <Skeleton width={100} />}
+                                {userProfile ? `${kmTraveled}km` : <Skeleton style={{ borderRadius: '5px' }} width={100} />}
                             </C.Value>
                         </C.Item>
                         <C.Item>
                             <C.Title>Gasto</C.Title>
                             <C.Value>
                                 {/* R$ {expense.toFixed(2).replace('.', ',')} */}
-                                {userProfile ? `R$ ${expense.toFixed(2).replace('.', ',')}` : <Skeleton width={100} />}
+                                {userProfile ? `R$ ${expense.toFixed(2).replace('.', ',')}` : <Skeleton style={{ borderRadius: '5px' }} width={100} />}
                             </C.Value>
                         </C.Item>
 

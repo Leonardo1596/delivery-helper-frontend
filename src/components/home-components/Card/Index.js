@@ -11,7 +11,7 @@ const Index = ({ userProfile, title, value }) => {
           <c.Header>{title}</c.Header>
           <c.Value>
             {/* R$ {value} */}
-            {userProfile ? `R$ ${value}` : <Skeleton width={100} height={23} />}
+            {userProfile ? `R$ ${value}` : <Skeleton style={{ borderRadius: '5px' }} width={100} height={23} />}
           </c.Value>
         </c.Container>
       </c.Card>

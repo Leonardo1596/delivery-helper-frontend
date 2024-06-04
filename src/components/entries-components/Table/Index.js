@@ -54,14 +54,14 @@ const Index = ({ userProfile, tableData, handleShowConfirmPopup }) => {
                     )) : (
                         Array.from({ length: 4 }).map((_, index) => (
                         <tr key={index}>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
-                            <C.TableCell><Skeleton width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
+                            <C.TableCell><Skeleton style={{ borderRadius: '5px' }} width={90} /></C.TableCell>
                         </tr>
                         ))
                     )}

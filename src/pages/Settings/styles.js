@@ -28,11 +28,14 @@ export const Container = styled.div`
     flex-direction: column;
     margin-bottom: 30px;
     max-width: 100vw;
+
+    @media (max-width: 1200px) {
+        padding: 0 30px;
+    }
 `;
 
 export const Box = styled.div`
     background-color: #fff;
-    /* margin-top: 40px; */
     padding: 30px 0;
     width: 100%;
     border-radius: 25px;
@@ -49,6 +52,10 @@ export const HeaderContainer = styled.div`
     width: 100%;
     padding: 0 40px;
     margin-bottom: 30px;
+
+    @media (max-width: 480px) {
+        padding: 0 30px;
+    }
 `;
 
 export const Header = styled.h2`
@@ -75,6 +82,22 @@ export const MenuHeader = styled.header`
     0px 2px 1px -1px rgba(0,0,0,0.2),
     0px 1px 1px 0px rgba(0,0,0,0.14),
     0px 1px 3px 0px rgba(0,0,0,0.12);
+    position: relative;
+
+    @media (max-width: 590px) {
+        height: 35px;
+    }
+`;
+
+export const Highlighter = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  background-color: #3D8FE7;
+  transition: all 0.5s ease;
+  border-radius: 25px;
+  z-index: 1;
 `;
 
 export const HeaderButton = styled.button`
@@ -87,14 +110,29 @@ export const HeaderButton = styled.button`
     padding: 10px 0;
     border: none;
     outline: none;
-    /* background-color: #3D8FE7; */
     background-color: transparent;
     color: #333;
     font-size: 13px;
     cursor: pointer;
+    z-index: 2;
 
     &.selected {
-    background-color: #3D8FE7;
     color: white;
+    }
+
+    @media (max-width: 980px) {
+        min-width: 150px;
+    }
+
+    @media (max-width: 590px) {
+        min-width: 120px;
+    }
+
+    @media (max-width: 520px) {
+        min-width: 100px;
+    }
+
+    @media (max-width: 480px) {
+        min-width: 90px;
     }
 `;

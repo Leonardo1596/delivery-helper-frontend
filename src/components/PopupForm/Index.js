@@ -5,7 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 import gifLoading from '../../assets/gif/loading-gif.gif';
 
 const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
-  const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -81,6 +81,7 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
             .then(response => {
                 getUserInfo();
                 handleClosePopup();
+                setLoading(false);
             })
             .catch(error => {
                 console.log(error)
@@ -127,7 +128,7 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
                             />
                         </C.FormField>
                         <C.ButtonContainer>
-                            <C.Button onClick={addEntrie}>
+                            <C.Button onClick={addEntrie} disabled={loading}>
                                 {loading ? <img src={gifLoading} /> : 'Adicionar Lançamento'}
                             </C.Button>
                         </C.ButtonContainer>

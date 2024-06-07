@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 
-const Index = ({ userProfile, saveUpdate }) => {
+const Index = ({ userProfile, saveProfileUpdate }) => {
     const handleChange = (event) => {
         const { id, value } = event.target;
         setFormValues((prevValues) => ({
@@ -28,7 +28,7 @@ const Index = ({ userProfile, saveUpdate }) => {
     
 
     function handleSaveButton() {
-        saveUpdate(formValues);
+        saveProfileUpdate(formValues);
     };
     return (
         <div>

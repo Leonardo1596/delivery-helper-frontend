@@ -3,6 +3,8 @@ import * as C from './styles'
 import axios from 'axios';
 import Navbar from '../../components/Navbar/Index';
 import Profile from '../../components/settings-components/Profile/Index';
+import Goals from '../../components/settings-components/Goals/Index';
+import CostPerKm from '../../components/settings-components/CostPerKm/Index';
 import { useSelector } from 'react-redux';
 
 const Index = () => {
@@ -11,11 +13,11 @@ const Index = () => {
   const [activeContent, setActiveContent] = useState('Perfil');
   const [highlighterStyle, setHighlighterStyle] = useState({});
   const menuHeaderRef = useRef(null);
-
+  
   function getUserInfo() {
     axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
       .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
         setUserProfile(response.data);
       })
       .catch(error => {
@@ -43,15 +45,7 @@ const Index = () => {
     setActiveContent(content);
   };
 
-  const ContentMetas = () => {
-    return <div>Conteúdo de metas</div>;
-  };
-
-  const ContentCustoPorKm = () => {
-    return <div>Conteúdo de custo por km</div>;
-  };
-
-  function saveUpdate(update) {
+  function saveProfileUpdate(update) {
     axios.put(`https://delivery-helper-backend.onrender.com/update/user/${userId}`, update)
       .then(response => {
         console.log(response.data);
@@ -93,9 +87,9 @@ const Index = () => {
                 </C.HeaderButton>
               </C.MenuHeader>
             </C.MenuHeaderContainer>
-            {activeContent === 'Perfil' && <Profile userProfile={userProfile} saveUpdate={saveUpdate} />}
-            {activeContent === 'Metas' && <ContentMetas />}
-            {activeContent === 'CustoPorKm' && <ContentCustoPorKm />}
+            {activeContent === 'Perfil' && <Profile userProfile={userProfile} saveProfileUpdate={saveProfileUpdate} />}
+            {activeContent === 'Metas' && <Goals userProfile={userProfile} />}
+            {activeContent === 'CustoPorKm' && <CostPerKm userProfile={userProfile} />}
           </C.Box>
         </C.Container>
       </C.Content>

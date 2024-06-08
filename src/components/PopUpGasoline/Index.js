@@ -43,7 +43,7 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
 
         // Get costPerKm
         let costPerKm;
-        await axios.get(`http://localhost:8000/get/costPerKm/${userProfile.costPerKm[0]._id}`)
+        await axios.get(`https://delivery-helper-backend.onrender.com/get/costPerKm/${userProfile.costPerKm[0]._id}`)
         .then(response => {
             costPerKm = response.data;
         });
@@ -57,7 +57,7 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
 
         let updatedCostPerKm = updateGasolinaValue(costPerKm, formValues.value)
 
-        axios.put(`http://localhost:8000/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, updatedCostPerKm)
+        axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, updatedCostPerKm)
             .then(response => {
                 // console.log(response.data)
                 getUserInfo();

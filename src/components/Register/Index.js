@@ -25,7 +25,7 @@ const Index = (props) => {
       confirmPasswordRef: confirmPasswordRef.current.value
     };
 
-    axios.post('http://localhost:8000/auth/sign-up', body)
+    axios.post('https://delivery-helper-backend.onrender.com/auth/sign-up', body)
       .then(response => {
         // console.log(response.data);
         dispatch(setAuth(true));

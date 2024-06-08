@@ -15,7 +15,7 @@ const Index = () => {
   const menuHeaderRef = useRef(null);
 
   function getUserInfo() {
-    axios.get(`http://localhost:8000/get/user/${userId}`)
+    axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
       .then(response => {
         // console.log(response.data);
         setUserProfile(response.data);
@@ -138,9 +138,9 @@ const Index = () => {
     const totalCostPerKm = calculateCostPerKmTotal(costPerKm);
 
     // Update user
-    axios.put(`http://localhost:8000/update/user/${userId}`, { totalCostPerKm: Number(totalCostPerKm.toFixed(4)) });
+    axios.put(`https://delivery-helper-backend.onrender.com/update/user/${userId}`, { totalCostPerKm: Number(totalCostPerKm.toFixed(4)) });
 
-    axios.put(`http://localhost:8000/cost_per_km/update/${userId}/${userProfile.costPerKm[0]._id}`, body)
+    axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userId}/${userProfile.costPerKm[0]._id}`, body)
       .then(response => {
         // console.log(response.data);
         window.location.href = '/configuracoes'

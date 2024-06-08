@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 
-const Index = ({ userProfile }) => {
+const Index = ({ userProfile, saveGoalsUpdate }) => {
     const [formValues, setFormValues] = useState({
         formattedSalary: '',
         formattedGoal1: '',
@@ -33,12 +33,16 @@ const Index = ({ userProfile }) => {
     useEffect(() => {
         if (userProfile) {
             setFormValues({
-                formattedSalary: userProfile.goals[0].salaryLimit || '',
-                formattedGoal1: userProfile.goals[0].goal1Limit || '',
-                formattedGoal2: userProfile.goals[0].goal2Limit || ''
+                formattedSalary: userProfile.goals[0].salaryLimit ? formatCurrency((userProfile.goals[0].salaryLimit * 100).toString()) : '',
+                formattedGoal1: userProfile.goals[0].goal1Limit ? formatCurrency((userProfile.goals[0].goal1Limit * 100).toString()) : '',
+                formattedGoal2: userProfile.goals[0].goal2Limit ? formatCurrency((userProfile.goals[0].goal2Limit * 100).toString()) : ''
             });
         }
     }, [userProfile]);
+
+    function handleSaveButton() {
+        saveGoalsUpdate(formValues);
+    };
 
     return (
         <div>
@@ -85,10 +89,13 @@ const Index = ({ userProfile }) => {
                             />
                         </C.FormField>
                     </C.Form>
+                    <C.ButtonContainer>
+                        <C.Button onClick={handleSaveButton}>Salvar alterações</C.Button>
+                    </C.ButtonContainer>
                 </C.Container>
             </C.Content>
         </div>
-    )
+    );
 }
 
 export default Index;

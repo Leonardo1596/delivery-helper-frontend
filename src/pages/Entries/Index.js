@@ -21,7 +21,7 @@ const Index = () => {
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
   function getUserInfo() {
-    axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
+    axios.get(`http://localhost:8000/get/user/${userId}`)
       .then(response => {
         // console.log(response.data);
         setUserProfile(response.data);

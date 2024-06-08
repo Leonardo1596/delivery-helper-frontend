@@ -50,34 +50,19 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
         }));
     };
 
-    // Calculate costPerKm total
-    function calculateCostPerKmTotal(obj) {
-        const fields = ['oleo', 'relacao', 'pneuDianteiro', 'pneuTraseiro', 'gasolina'];
-        let total = 0;
-
-        fields.forEach(field => {
-            if (obj[field] !== undefined) {
-                total += obj[field];
-            }
-        });
-
-        return total;
-    };
-
-
-
     function addEntrie() {
         setLoading(true);
+
         let body = {
             userId: userProfile._id,
             date: formValues.date,
             initialKm: Number(formValues.initialKm),
             finalKm: Number(formValues.finalKm),
             grossGain: Number(formValues.value),
-            costPerKm: calculateCostPerKmTotal(userProfile.costPerKm[0])
+            costPerKm: userProfile.totalCostPerKm
         };
 
-        axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
+        axios.post('http://localhost:8000/entry/create', body)
             .then(response => {
                 getUserInfo();
                 handleClosePopup();

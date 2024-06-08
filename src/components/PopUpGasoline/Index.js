@@ -34,19 +34,35 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
         }));
     };
 
-    function updateGasolineValue() {
+    async function updateGasolineValue() {
         setLoading(true);
-        const cost = (Number(formValues.value) / 35).toFixed(3);
 
         if (formValues.value === 0) {
             return;
         }
 
-        axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, { gasolina: Number(cost) })
+        // Get costPerKm
+        let costPerKm;
+        await axios.get(`http://localhost:8000/get/costPerKm/${userProfile.costPerKm[0]._id}`)
+        .then(response => {
+            costPerKm = response.data;
+        });
+
+        function updateGasolinaValue(obj, newValue) {
+            let updatedCostPerKm = { ...obj };
+
+            updatedCostPerKm.gasolina = { ...updatedCostPerKm.gasolina, value: newValue };
+            return updatedCostPerKm
+        };
+
+        let updatedCostPerKm = updateGasolinaValue(costPerKm, formValues.value)
+
+        axios.put(`http://localhost:8000/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, updatedCostPerKm)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 getUserInfo();
                 handleClosePopup();
+                window.location.href = '/lancamentos'
             })
             .catch(error => {
                 console.log(error);

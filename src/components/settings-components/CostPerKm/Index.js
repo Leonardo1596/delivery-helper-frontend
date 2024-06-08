@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as C from './styles';
 
-const Index = ({ userProfile }) => {
-    console.log(userProfile.costPerKm[0].oleo.km);
+const Index = ({ userProfile, saveCostPerKmUpdate }) => {
     const [formValues, setFormValues] = useState({
         formattedOleoValue: '',
         oleoKm: '',
@@ -49,22 +48,24 @@ const Index = ({ userProfile }) => {
     useEffect(() => {
         if (userProfile) {
             setFormValues({
-                formattedOleoValue: userProfile.costPerKm[0].oleo.value || '',
-                oleoKm: userProfile.costPerKm[0].oleo.km,
-                formattedRelacaoValue: userProfile.costPerKm[0].relacao.value || '',
+                formattedOleoValue: userProfile.costPerKm[0].oleo.value ? formatCurrency((userProfile.costPerKm[0].oleo.value * 100).toString()) : '',
+                oleoKm: userProfile.costPerKm[0].oleo.km || '',
+                formattedRelacaoValue: userProfile.costPerKm[0].relacao.value ? formatCurrency((userProfile.costPerKm[0].relacao.value * 100).toString()) : '',
                 relacaoKm: userProfile.costPerKm[0].relacao.km || '',
-                formattedPneuDianteiroValue: userProfile.costPerKm[0].pneuDianteiro.value || '',
+                formattedPneuDianteiroValue: userProfile.costPerKm[0].pneuDianteiro.value ? formatCurrency((userProfile.costPerKm[0].pneuDianteiro.value * 100).toString()) : '',
                 pneuDianteiroKm: userProfile.costPerKm[0].pneuDianteiro.km || '',
-                formattedPneuTraseiro: userProfile.costPerKm[0].pneuTraseiro.value || '',
+                formattedPneuTraseiroValue: userProfile.costPerKm[0].pneuTraseiro.value ? formatCurrency((userProfile.costPerKm[0].pneuTraseiro.value * 100).toString()) : '',
                 pneuTraseiroKm: userProfile.costPerKm[0].pneuTraseiro.km || '',
-                formattedGasolina: userProfile.costPerKm[0].gasolina.value || '',
+                formattedGasolinaValue: userProfile.costPerKm[0].gasolina.value ? formatCurrency((userProfile.costPerKm[0].gasolina.value * 100).toString()) : '',
                 gasolinaKm: userProfile.costPerKm[0].gasolina.km || '',
             });
         }
-
     }, [userProfile]);
 
-    console.log(formValues);
+    function handleSaveButton() {
+        saveCostPerKmUpdate(formValues);
+    };
+
     return (
         <div>
             <C.Content>
@@ -80,7 +81,7 @@ const Index = ({ userProfile }) => {
                                 marginTop: '10px',
                                 marginBottom: '0'
                             }}>
-                                <C.Label>Valor</C.Label>
+                                <C.Label>Preço</C.Label>
                                 <C.Input
                                     type='text'
                                     style={{ caretColor: 'transparent' }}
@@ -95,7 +96,12 @@ const Index = ({ userProfile }) => {
                                     marginBottom: '0'
                                 }}>
                                     <C.Label>Km</C.Label>
-                                    <C.Input type='number' id='oleoKm' value={formValues.oleoKm} onChange={handleChange} />
+                                    <C.Input
+                                        type='number'
+                                        id='oleoKm'
+                                        value={formValues.oleoKm}
+                                        onChange={handleChange}
+                                    />
                                 </C.FormField>
                             </C.FormField>
                         </C.FormField>
@@ -106,13 +112,13 @@ const Index = ({ userProfile }) => {
                                 marginTop: '10px',
                                 marginBottom: '0'
                             }}>
-                                <C.Label>Valor</C.Label>
+                                <C.Label>Preço</C.Label>
                                 <C.Input
                                     type='text'
                                     style={{ caretColor: 'transparent' }}
                                     autoComplete="off"
                                     placeholder='R$ 0,00'
-                                    name='relacao'
+                                    name='relacaoValue'
                                     value={formValues.formattedRelacaoValue}
                                     onChange={handleValueChange}
                                 />
@@ -121,7 +127,12 @@ const Index = ({ userProfile }) => {
                                     marginBottom: '0'
                                 }}>
                                     <C.Label>Km</C.Label>
-                                    <C.Input type='number' id='relacaoKm' value={formValues.relacaoKm} onChange={handleChange} />
+                                    <C.Input
+                                        type='number'
+                                        id='relacaoKm'
+                                        value={formValues.relacaoKm}
+                                        onChange={handleChange}
+                                    />
                                 </C.FormField>
                             </C.FormField>
                         </C.FormField>
@@ -132,13 +143,13 @@ const Index = ({ userProfile }) => {
                                 marginTop: '10px',
                                 marginBottom: '0'
                             }}>
-                                <C.Label>Valor</C.Label>
+                                <C.Label>Preço</C.Label>
                                 <C.Input
                                     type='text'
                                     style={{ caretColor: 'transparent' }}
                                     autoComplete="off"
                                     placeholder='R$ 0,00'
-                                    name='pneuDianteiro'
+                                    name='pneuDianteiroValue'
                                     value={formValues.formattedPneuDianteiroValue}
                                     onChange={handleValueChange}
                                 />
@@ -147,7 +158,12 @@ const Index = ({ userProfile }) => {
                                     marginBottom: '0'
                                 }}>
                                     <C.Label>Km</C.Label>
-                                    <C.Input type='number' id='pneuDianteiroKm' value={formValues.pneuDianteiroKm} onChange={handleChange} />
+                                    <C.Input
+                                        type='number'
+                                        id='pneuDianteiroKm'
+                                        value={formValues.pneuDianteiroKm}
+                                        onChange={handleChange}
+                                    />
                                 </C.FormField>
                             </C.FormField>
                         </C.FormField>
@@ -158,13 +174,13 @@ const Index = ({ userProfile }) => {
                                 marginTop: '10px',
                                 marginBottom: '0'
                             }}>
-                                <C.Label>Valor</C.Label>
+                                <C.Label>Preço</C.Label>
                                 <C.Input
                                     type='text'
                                     style={{ caretColor: 'transparent' }}
                                     autoComplete="off"
                                     placeholder='R$ 0,00'
-                                    name='pneuTraseiro'
+                                    name='pneuTraseiroValue'
                                     value={formValues.formattedPneuTraseiroValue}
                                     onChange={handleValueChange}
                                 />
@@ -173,25 +189,29 @@ const Index = ({ userProfile }) => {
                                     marginBottom: '0'
                                 }}>
                                     <C.Label>Km</C.Label>
-                                    <C.Input type='number' id='pneuTraseiroKm' value={formValues.pneuTraseiroKm} onChange={handleChange} />
+                                    <C.Input
+                                        type='number'
+                                        id='pneuTraseiroKm'
+                                        value={formValues.pneuTraseiroKm}
+                                        onChange={handleChange}
+                                    />
                                 </C.FormField>
                             </C.FormField>
                         </C.FormField>
                         <C.FormField>
                             <C.Label>Gasolina</C.Label>
-
                             <C.FormField style={{
                                 marginLeft: '20px',
                                 marginTop: '10px',
                                 marginBottom: '0'
                             }}>
-                                <C.Label>Valor</C.Label>
+                                <C.Label>Preço</C.Label>
                                 <C.Input
                                     type='text'
                                     style={{ caretColor: 'transparent' }}
                                     autoComplete="off"
                                     placeholder='R$ 0,00'
-                                    name='gasolina'
+                                    name='gasolinaValue'
                                     value={formValues.formattedGasolinaValue}
                                     onChange={handleValueChange}
                                 />
@@ -200,11 +220,19 @@ const Index = ({ userProfile }) => {
                                     marginBottom: '0'
                                 }}>
                                     <C.Label>Km</C.Label>
-                                    <C.Input type='number' id='gasolinaKm' value={formValues.gasolinaKm} onChange={handleChange} />
+                                    <C.Input
+                                        type='number'
+                                        id='gasolinaKm'
+                                        value={formValues.gasolinaKm}
+                                        onChange={handleChange}
+                                    />
                                 </C.FormField>
                             </C.FormField>
                         </C.FormField>
                     </C.Form>
+                    <C.ButtonContainer>
+                        <C.Button onClick={handleSaveButton}>Salvar alterações</C.Button>
+                    </C.ButtonContainer>
                 </C.Container>
             </C.Content>
         </div>

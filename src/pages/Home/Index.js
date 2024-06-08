@@ -10,12 +10,11 @@ import SummaryBox from '../../components/home-components/SummaryBox/Index';
 import MaintenanceBox from '../../components/home-components/MaintenanceBox/Index';
 
 const Home = () => {
-  // const userProfile = useSelector((state) => state.handleSetUser);
   const userId = useSelector((state) => state.handleSetUserId);
   const [userProfile, setUserProfile] = useState('');
 
   function getUserInfo() {
-    axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
+    axios.get(`http://localhost:8000/get/user/${userId}`)
       .then(response => {
         // console.log(response.data);
         setUserProfile(response.data);
@@ -74,8 +73,6 @@ const Home = () => {
 
   let goal2 = userProfile && Math.min(remaining, userProfile.goals[0].goal2Limit);
   remaining -= goal2;
-
-
 
   return (
     <div>

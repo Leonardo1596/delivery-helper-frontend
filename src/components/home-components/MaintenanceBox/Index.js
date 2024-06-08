@@ -4,11 +4,13 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const Index = ({ userProfile, costPerKm, kmTraveled }) => {
-    const oleo = userProfile && kmTraveled * costPerKm.oleo.value;
-    const relacao = userProfile && kmTraveled * costPerKm.relacao.value;
-    const pneuDianteiro = userProfile && kmTraveled * costPerKm.pneuDianteiro.value;
-    const pneuTraseiro = userProfile && kmTraveled * costPerKm.pneuTraseiro.value;
-    const gasolina = userProfile && kmTraveled * costPerKm.gasolina.value;
+    const oleo = userProfile && kmTraveled * costPerKm.oleo.value / costPerKm.oleo.km;
+    const relacao = userProfile && kmTraveled * costPerKm.relacao.value  / costPerKm.relacao.km;
+    const pneuDianteiro = userProfile && kmTraveled * costPerKm.pneuDianteiro.value  / costPerKm.pneuDianteiro.km;
+    const pneuTraseiro = userProfile && kmTraveled * costPerKm.pneuTraseiro.value  / costPerKm.pneuTraseiro.km;
+    const gasolina = userProfile && kmTraveled * costPerKm.gasolina.value  / costPerKm.gasolina.km;
+
+    console.log(oleo);
 
     return (
         <div>

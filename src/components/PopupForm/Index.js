@@ -4,9 +4,7 @@ import axios from 'axios';
 import { FaXmark } from "react-icons/fa6";
 import gifLoading from '../../assets/gif/loading-gif.gif';
 
-const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
-    const [loading, setLoading] = useState(false);
-
+const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
@@ -50,32 +48,10 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
         }));
     };
 
-    function addEntrie() {
+    function handleButton() {
         setLoading(true);
-
-        let body = {
-            userId: userProfile._id,
-            date: formValues.date,
-            initialKm: Number(formValues.initialKm),
-            finalKm: Number(formValues.finalKm),
-            grossGain: Number(formValues.value),
-            costPerKm: userProfile.totalCostPerKm
-        };
-
-        axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
-            .then(response => {
-                getUserInfo();
-                handleClosePopup();
-                setLoading(false);
-            })
-            .catch(error => {
-                console.log(error)
-            });
-    }
-
-    function handleClosePopup() {
-        setShowPopup(false)
-    }
+        addEntrie(formValues);
+    };
 
     return (
         <div>
@@ -84,7 +60,7 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
                     <C.Header>
                         <C.Title>Novo lançamento</C.Title>
                         <C.CloseIcon>
-                            <FaXmark onClick={handleClosePopup} />
+                            <FaXmark onClick={handleClosePopupForm} />
                         </C.CloseIcon>
                     </C.Header>
                     <C.Form>
@@ -113,7 +89,7 @@ const Index = ({ userProfile, setShowPopup, getUserInfo }) => {
                             />
                         </C.FormField>
                         <C.ButtonContainer>
-                            <C.Button onClick={addEntrie} disabled={loading}>
+                            <C.Button onClick={handleButton} disabled={loading}>
                                 {loading ? <img src={gifLoading} /> : 'Adicionar Lançamento'}
                             </C.Button>
                         </C.ButtonContainer>

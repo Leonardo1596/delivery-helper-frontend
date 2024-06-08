@@ -10,8 +10,12 @@ import Table from '../../components/entries-components/Table/Index';
 import Weeks from '../../components/Weeks/Index';
 import PopUpGasoline from '../../components/PopUpGasoline/Index';
 import ConfirmPopup from '../../components/ConfirmPopup/Index';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Index = () => {
+  const [loading, setLoading] = useState(false);
+
   const [showPopup, setShowPopup] = useState(false);
   const [userProfile, setUserProfile] = useState('');
   const userId = useSelector((state) => state.handleSetUserId);
@@ -81,10 +85,12 @@ const Index = () => {
 
   const hanleDeleteEntry = () => {
     if (itemToDelete) {
+      const id = toast.loading("Por favor espere...")
       axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${userProfile._id}/${itemToDelete._id}`)
         .then(response => {
           getUserInfo();
           setShowConfirmPopup(false);
+          toast.update(id, { render: "Deletado com sucesso", type: "success", isLoading: false, autoClose: 1500 });
         })
         .catch(error => {
           console.log(error);
@@ -92,12 +98,79 @@ const Index = () => {
     }
   };
 
+  async function updateGasolineValue(data) {
+    setLoading(true);
+
+    // Get costPerKm
+    let costPerKm;
+    await axios.get(`https://delivery-helper-backend.onrender.com/get/costPerKm/${userProfile.costPerKm[0]._id}`)
+      .then(response => {
+        costPerKm = response.data;
+      });
+
+    function updateGasolinaValue(obj, newValue) {
+      let updatedCostPerKm = { ...obj };
+
+      updatedCostPerKm.gasolina = { ...updatedCostPerKm.gasolina, value: newValue };
+      return updatedCostPerKm
+    };
+
+    let updatedCostPerKm = updateGasolinaValue(costPerKm, data)
+
+    const id = toast.loading("Por favor espere...")
+    axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, updatedCostPerKm)
+      .then(response => {
+        // console.log(response.data)
+        getUserInfo();
+        handleClosePopup();
+        setLoading(false);
+        toast.update(id, { render: "Atualizado com sucesso", type: "success", isLoading: false, autoClose: 1500 });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  function addEntrie(data) {
+    setLoading(true);
+
+    let body = {
+        userId: userProfile._id,
+        date: data.date,
+        initialKm: Number(data.initialKm),
+        finalKm: Number(data.finalKm),
+        grossGain: Number(data.value),
+        costPerKm: userProfile.totalCostPerKm
+    };
+
+    const id = toast.loading("Por favor espere...")
+    axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
+        .then(response => {
+            getUserInfo();
+            handleClosePopupForm();
+            setLoading(false);
+            toast.update(id, { render: "Adicionado com sucesso", type: "success", isLoading: false, autoClose: 1500 });
+        })
+        .catch(error => {
+            console.log(error)
+        });
+}
+
+  function handleClosePopupForm() {
+    setShowPopup(false)
+  }
+
+  function handleClosePopup() {
+    setShowGasolineForm(false);
+  };
+
   return (
     <div>
-      {showGasolineForm && <C.Overlay><PopUpGasoline userProfile={userProfile} setShowGasolineForm={setShowGasolineForm} getUserInfo={getUserInfo} /></C.Overlay>}
-      {showPopup && <C.Overlay><PopupForm setShowPopup={setShowPopup} userProfile={userProfile} getUserInfo={getUserInfo} /></C.Overlay>}
+      {showGasolineForm && <C.Overlay><PopUpGasoline updateGasolineValue={updateGasolineValue} handleClosePopup={handleClosePopup} loading={loading} setLoading={setLoading} /></C.Overlay>}
+      {showPopup && <C.Overlay><PopupForm addEntrie={addEntrie} handleClosePopupForm={handleClosePopupForm} loading={loading} setLoading={setLoading} /></C.Overlay>}
       {showConfirmPopup && <C.Overlay><ConfirmPopup setShowConfirmPopup={setShowConfirmPopup} message="Tem certeza que deseja excluir o lançamento?" hanleDeleteEntry={hanleDeleteEntry} /></C.Overlay>}
       <Navbar />
+      <ToastContainer />
       <C.Content>
         <Weeks onSelectWeek={handleSelectWeek} />
         <C.Container>

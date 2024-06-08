@@ -6,6 +6,8 @@ import Profile from '../../components/settings-components/Profile/Index';
 import Goals from '../../components/settings-components/Goals/Index';
 import CostPerKm from '../../components/settings-components/CostPerKm/Index';
 import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Index = () => {
   const userId = useSelector((state) => state.handleSetUserId);
@@ -46,10 +48,12 @@ const Index = () => {
   };
 
   function saveProfileUpdate(data) {
+    const id = toast.loading("Por favor espere...")
     axios.put(`https://delivery-helper-backend.onrender.com/update/user/${userId}`, data)
       .then(response => {
-        console.log(response.data);
-        window.location.href = '/configuracoes'
+        // console.log(response.data);
+        // window.location.href = '/configuracoes'
+        toast.update(id, { render: "Salvo com sucesso", type: "success", isLoading: false, autoClose: 1500 });
       })
       .catch(error => {
         console.error(error);
@@ -73,10 +77,12 @@ const Index = () => {
       goal2Limit
     }
 
+    const id = toast.loading("Por favor espere...")
     axios.put(`https://delivery-helper-backend.onrender.com/goal/update/${userId}/${userProfile.goals[0]._id}`, body)
       .then(response => {
         // console.log(response.data);
-        window.location.href = '/configuracoes'
+        // window.location.href = '/configuracoes'
+        toast.update(id, { render: "Salvo com sucesso", type: "success", isLoading: false, autoClose: 1500 });
       })
       .catch(error => {
         console.error(error);
@@ -114,7 +120,7 @@ const Index = () => {
     };
 
     const costPerKm = {
-      oleo: body.oleo.km !== 0 ? body.oleo.value / body.oleo.km: 0,
+      oleo: body.oleo.km !== 0 ? body.oleo.value / body.oleo.km : 0,
       relacao: body.relacao.km !== 0 ? body.relacao.value / body.relacao.km : 0,
       pneuDianteiro: body.pneuDianteiro.km !== 0 ? body.pneuDianteiro.value / body.pneuDianteiro.km : 0,
       pneuTraseiro: body.pneuTraseiro.km !== 0 ? body.pneuTraseiro.value / body.pneuTraseiro.km : 0,
@@ -140,10 +146,12 @@ const Index = () => {
     // Update user
     axios.put(`https://delivery-helper-backend.onrender.com/update/user/${userId}`, { totalCostPerKm: Number(totalCostPerKm.toFixed(4)) });
 
+    const id = toast.loading("Por favor espere...")
     axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userId}/${userProfile.costPerKm[0]._id}`, body)
       .then(response => {
         // console.log(response.data);
-        window.location.href = '/configuracoes'
+        // window.location.href = '/configuracoes'
+        toast.update(id, { render: "Salvo com sucesso", type: "success", isLoading: false, autoClose: 1500 });
       })
       .catch(error => {
         console.error(error);
@@ -154,6 +162,7 @@ const Index = () => {
   return (
     <div>
       <Navbar />
+      <ToastContainer />
       <C.Content>
         <C.Container>
           <C.Box>

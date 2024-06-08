@@ -4,9 +4,7 @@ import { FaXmark } from "react-icons/fa6";
 import axios from 'axios';
 import gifLoading from '../../assets/gif/loading-gif.gif';
 
-const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
-    const[loading, setLoading] = useState(false);
-
+const Index = ({ updateGasolineValue, handleClosePopup, loading, setLoading }) => {
     const [formValues, setFormValues] = useState({
         value: 0,
     });
@@ -34,48 +32,19 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
         }));
     };
 
-    async function updateGasolineValue() {
+    async function handleButton() {
         setLoading(true);
-
+        console.log('chegou aqui');
         if (formValues.value === 0) {
             return;
         }
-
-        // Get costPerKm
-        let costPerKm;
-        await axios.get(`https://delivery-helper-backend.onrender.com/get/costPerKm/${userProfile.costPerKm[0]._id}`)
-        .then(response => {
-            costPerKm = response.data;
-        });
-
-        function updateGasolinaValue(obj, newValue) {
-            let updatedCostPerKm = { ...obj };
-
-            updatedCostPerKm.gasolina = { ...updatedCostPerKm.gasolina, value: newValue };
-            return updatedCostPerKm
-        };
-
-        let updatedCostPerKm = updateGasolinaValue(costPerKm, formValues.value)
-
-        axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, updatedCostPerKm)
-            .then(response => {
-                // console.log(response.data)
-                getUserInfo();
-                handleClosePopup();
-                window.location.href = '/lancamentos'
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-
-    function handleClosePopup() {
-        setShowGasolineForm(false);
+        
+        updateGasolineValue(formValues.value)
     };
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            updateGasolineValue();
+            handleButton();
         }
     };
     return (
@@ -103,7 +72,7 @@ const Index = ({ userProfile, setShowGasolineForm, getUserInfo }) => {
                             />
                         </C.FormField>
                         <C.ButtonContainer>
-                            <C.Button onClick={updateGasolineValue}>
+                            <C.Button onClick={handleButton} disabled={loading} >
                                 {loading ? <img src={gifLoading} /> : 'Alterar valor da gasolina'}
                             </C.Button>
                         </C.ButtonContainer>

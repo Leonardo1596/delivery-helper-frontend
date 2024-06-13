@@ -44,8 +44,8 @@ export const Header = styled.h2`
     font-weight: 500;
     margin-bottom: 50px;
 
-    @media (max-width: 600px) {
-        font-size: 17px;
+    @media (max-width: 500px) {
+        font-size: 15px;
     }
 `;
 
@@ -72,8 +72,8 @@ export const Item = styled.li`
 `;
 
 export const Title = styled.span`
-    @media (max-width: 600px) {
-        font-size: 14px;
+    @media (max-width: 500px) {
+        font-size: 12px;
     }
 `;
 
@@ -81,7 +81,7 @@ export const Value = styled.span`
     color: rgba(0, 0, 0, 0.54);
     font-size: 18px;
 
-    @media (max-width: 600px) {
-        font-size: 14px;
+    @media (max-width: 500px) {
+        font-size: 12px;
     }
 `;

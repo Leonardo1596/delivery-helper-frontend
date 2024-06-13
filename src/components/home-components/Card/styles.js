@@ -26,7 +26,7 @@ export const Header = styled.p`
     margin-bottom: 10px;
 
     @media screen and (max-width: 500px) {
-        font-size: 15px;
+        font-size: 13px;
     }
 `;
 
@@ -36,6 +36,6 @@ export const Value = styled.h5`
     font-weight: 500;
 
     @media screen and (max-width: 500px) {
-        font-size: 20px;
+        font-size: 17px;
     }
 `;

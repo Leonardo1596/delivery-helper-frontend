@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
+    font-family: 'Nunito Sans';
     `;
 
 export const TableHeader = styled.th`
@@ -12,6 +13,10 @@ export const TableHeader = styled.th`
     color: rgba(0, 0, 0, 0.80);
     font-size: 14px;
     background-color: #f2f2f2;
+
+    @media (max-width: 500px) {
+        font-size: 12px;
+    }
 `;
 
 export const TableCell = styled.td`
@@ -30,5 +35,9 @@ export const TableCell = styled.td`
     #delete-icon {
         color: #F44336;
         cursor: pointer;
+    }
+
+    @media (max-width: 500px) {
+        font-size: 12px;
     }
 `;

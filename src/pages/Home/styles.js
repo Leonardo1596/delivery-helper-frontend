@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Content = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 30px;
     
     @media (max-width: 1200px) {
         padding: 0 60px;
@@ -13,7 +13,7 @@ export const Content = styled.div`
         padding: 0 20px;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 500px) {
         padding: 0 15px;
     }
     `;
@@ -42,7 +42,7 @@ export const GridCards = styled.div`
     }
 
     @media (max-width: 600px) {
-        margin-bottom: 60px;
+        margin-bottom: 50px;
     }
 `;
 
@@ -57,11 +57,9 @@ export const MainContainer = styled.div`
         width: 100%;
     }
 
-
-
     @media (max-width: 600px) {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 15px;
     }
 `;

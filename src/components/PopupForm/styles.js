@@ -15,6 +15,10 @@ export const Box = styled.div`
     width: 500px;
     border-radius: 25px;
     background-color: #fff;
+
+    @media (max-width: 500px) {
+        width: 450px;
+    }
 `;
 
 export const Header = styled.div`
@@ -28,6 +32,10 @@ export const Title = styled.h2`
     color: rgba(0, 0, 0, 0.87);
     font-weight: 500;
     font-size: 20px;
+
+    @media (max-width: 500px) {
+        font-size: 16px;
+    }
 `;
 
 export const CloseIcon = styled.button`
@@ -66,6 +74,10 @@ export const Label = styled.label`
     color: #888;
     margin-bottom: 5px;
     font-size: 15px;
+
+    @media (max-width: 500px) {
+        font-size: 13px;
+    }
 `;
 
 export const Input = styled.input`
@@ -79,6 +91,13 @@ export const Input = styled.input`
     
     &:focus {
         border-bottom: 1px solid black;
+    }
+
+    @media (max-width: 500px) {
+        &::placeholder {
+            font-size: 12px;
+        }
+        font-size: 12px;
     }
 `;
 
@@ -111,5 +130,9 @@ export const Button = styled.button`
 
     &:hover {
         background-color: #66A6F7;
+    }
+
+    @media (max-width: 500px) {
+        font-size: 11px;
     }
 `;

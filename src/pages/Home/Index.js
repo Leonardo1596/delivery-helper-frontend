@@ -28,7 +28,6 @@ const Home = () => {
     getUserInfo();
   }, []);
 
-
   // Get current date
   const today = new Date();
   const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 });

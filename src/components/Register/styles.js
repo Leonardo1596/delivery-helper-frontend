@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 
-export const Register = styled.div`
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    `;
-
 export const RegisterContainer = styled.div`
     width: 500px;
     padding: 50px;
     background-color: #fff;
     border-radius: 17px;
     position: relative;
+    font-family: 'Nunito Sans';
+
+    @media (max-width: 520px) {
+        width: 430px;
+        padding: 10px;
+        padding-top: 30px;
+        padding-bottom: 50px;
+    }
 `;
 
 export const RegisterHeader = styled.div`
@@ -25,9 +24,12 @@ export const RegisterHeader = styled.div`
 `;
 
 export const RegisterHeaderTitle = styled.h2`
-    font-family: 'Nunito Sans';
     font-size: 24px;
     font-weight: 400;
+
+    @media (max-width: 580px) {
+        font-size: 20px;
+    }
 `;
 
 export const RegisterForm = styled.div`
@@ -45,6 +47,10 @@ export const FormField = styled.div`
 export const FormLabel = styled.label`
     font-size: 16px;
     margin-bottom: 10px;
+
+    @media (max-width: 580px) {
+        font-size: 14px;
+    }
 `;
 
 export const FormInput = styled.input`
@@ -56,6 +62,16 @@ export const FormInput = styled.input`
     outline: none;
     text-indent: 15px;
     font-size: 14px;
+
+    @media (max-width: 580px) {
+        font-size: 12px;
+    }
+
+    &::placeholder {
+        @media (max-width: 580px) {
+            font-size: 12px;
+        }
+    }
 `;
 
 export const Link = styled.a`
@@ -64,6 +80,10 @@ export const Link = styled.a`
 
     &:hover {
         color: #3072b8;
+    }
+
+    @media (max-width: 580px) {
+        font-size: 12px;
     }
 `;
 
@@ -85,10 +105,27 @@ export const RegisterButton = styled.button`
     img {
         width: 27px;
         height: 27px;
+
+        @media (max-width: 580px) {
+            width: 25px;
+            height: 25px;
+        }
     }
 
     &:hover {
         background-color: #3072b8;
+    }
+
+    @media (max-width: 580px) {
+        font-size: 17px;
+
+        &:hover {
+            background-color: #3D8FE7;
+        }
+
+        &:active {
+            background-color: #3072b8;
+        }
     }
 `;
 
@@ -105,19 +142,9 @@ export const RegisterInfo = styled.div`
     span {
         font-size: 14px;
         margin-right: 10px;
-    }
-`;
 
-export const CloseIcon = styled.button`
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    outline: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    cursor: pointer;
+        @media (max-width: 580px) {
+            font-size: 12px;
+        }
+    }
 `;

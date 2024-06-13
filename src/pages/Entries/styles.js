@@ -6,6 +6,7 @@ export const Content = styled.div`
     align-items: center;
     flex-direction: column;
     margin-top: 60px;
+    font-family: 'Nunito Sans';
     
     @media (max-width: 1200px) {
         padding: 0 60px;
@@ -43,6 +44,10 @@ export const Header = styled.h2`
     color: rgba(0, 0, 0, 0.87);
     font-weight: 500;
     font-size: 20px;
+
+    @media (max-width: 500px) {
+        font-size: 17px;
+    }
 `;
 
 export const ButtonsContainer = styled.div`
@@ -99,6 +104,10 @@ export const Button = styled.button`
 
     &:hover {
         background-color: #66A6F7;
+    }
+
+    @media (max-width: 500px) {
+        font-size: 11px;
     }
 `;
 

@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 
-// export const Login = styled.div`
-//     width: 100%;
-//     min-height: 100vh;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     position: absolute;
-//     `;
-
 export const LoginContainer = styled.div`
+    font-family: 'Nunito Sans';
     width: 500px;
     padding: 50px;
     padding-top: 30px;
     background-color: #fff;
     border-radius: 17px;
     position: relative;
+
+    @media (max-width: 520px) {
+        width: 430px;
+        padding: 10px;
+        padding-top: 30px;
+        padding-bottom: 50px;
+    }
 `;
 
 export const Brand = styled.h1`
@@ -23,6 +22,10 @@ export const Brand = styled.h1`
     font-weight: bold;
     font-size: 26px;
     margin-bottom: 20px;
+
+    @media (max-width: 580px) {
+        font-size: 22px;
+    }
 `;
 
 export const LoginHeader = styled.div`
@@ -37,6 +40,10 @@ export const LoginHeaderTitle = styled.h2`
     font-family: 'Nunito Sans';
     font-size: 22px;
     font-weight: 400;
+
+    @media (max-width: 580px) {
+        font-size: 18px;
+    }
 `;
 
 export const LoginForm = styled.div`
@@ -54,6 +61,10 @@ export const FormField = styled.div`
 export const FormLabel = styled.label`
     font-size: 16px;
     margin-bottom: 10px;
+
+    @media (max-width: 580px) {
+        font-size: 14px;
+    }
 `;
 
 export const FormInput = styled.input`
@@ -65,6 +76,16 @@ export const FormInput = styled.input`
     outline: none;
     text-indent: 15px;
     font-size: 14px;
+
+    @media (max-width: 580px) {
+        font-size: 12px;
+    }
+
+    &::placeholder {
+        @media (max-width: 580px) {
+            font-size: 12px;
+        }
+    }
 `;
 
 export const Link = styled.a`
@@ -73,6 +94,10 @@ export const Link = styled.a`
 
     &:hover {
         color: #3072b8;
+    }
+
+    @media (max-width: 580px) {
+        font-size: 12px;
     }
 `;
 
@@ -94,10 +119,27 @@ export const LoginButton = styled.button`
     img {
         width: 27px;
         height: 27px;
+
+        @media (max-width: 580px) {
+            width: 25px;
+            height: 25px;
+        }
     }
 
     &:hover {
         background-color: #3072b8;
+    }
+
+    @media (max-width: 580px) {
+        font-size: 17px;
+
+        &:hover {
+            background-color: #3D8FE7;
+        }
+
+        &:active {
+            background-color: #3072b8;
+        }
     }
 `;
 
@@ -108,11 +150,19 @@ export const errorContainer = styled.div`
     font-size: 14px;
     color: red;
     margin-bottom: 10px;
+
+    @media (max-width: 580px) {
+        font-size: 12px;
+    }
 `;
 
 export const LoginInfo = styled.div`
     span {
         font-size: 14px;
         margin-right: 10px;
+
+        @media (max-width: 580px) {
+        font-size: 12px;
+    }
     }
 `;

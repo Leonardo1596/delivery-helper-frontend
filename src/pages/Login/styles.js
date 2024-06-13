@@ -6,7 +6,3 @@ export const Login = styled.div`
     display: flex;
     justify-content: center;
 `;
-
-export const Container = styled.div`
-    width: 500px;
-`;

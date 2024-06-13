@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const WeekContainer = styled.div`
     width: 100vw;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    font-family: 'Nunito Sans';
 `;
 
 export const WeekArea = styled.div`
@@ -53,6 +54,10 @@ export const DropdownButton = styled.button`
   font-size: 16px;
   border: none;
   cursor: pointer;
+
+  @media (max-width: 580px) {
+    font-size: 14px;
+  }
 `;
 
 export const DropdownContent = styled.div`
@@ -74,4 +79,8 @@ export const DropdownItem = styled.a`
   &:hover {
     background-color: #f1f1f1;
   }
+
+  @media (max-width: 500px) {
+        font-size: 13px;
+    }
 `;

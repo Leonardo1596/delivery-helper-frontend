@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as C from './styles';
 import { useDispatch } from 'react-redux';
 import { setAuth, setUserId } from '../../redux/action';
@@ -6,6 +6,8 @@ import { FaRegCircleUser, FaBars } from "react-icons/fa6";
 
 const Index = (props) => {
     const dispatch = useDispatch();
+
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     function handleDropdownButton() {
         const dropdown = document.querySelector('.dropdown');
@@ -16,6 +18,10 @@ const Index = (props) => {
             dropdown.style.display = 'block';
         }
     };
+
+    const handleSidebarToggle = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };;
 
     const handleLogin = () => {
         props.handleLoginClick();
@@ -32,14 +38,24 @@ const Index = (props) => {
 
     return (
         <div>
+            <C.Sidebar isOpen={isSidebarOpen}>
+                <C.SiderbarHeaderContainer>
+                    <C.SidebarHeader>Menu</C.SidebarHeader>
+                </C.SiderbarHeaderContainer>
+                <C.SidebarMenuList>
+                    <C.SidebarItemList><a href="/inicio">Acompanhar</a></C.SidebarItemList>
+                    <C.SidebarItemList><a href="/lancamentos">Lançamentos</a></C.SidebarItemList>
+                    <C.SidebarItemList><a href="#">Organização de gastos</a></C.SidebarItemList>
+                </C.SidebarMenuList>
+            </C.Sidebar>
+            <C.Overlay isOpen={isSidebarOpen} onClick={handleSidebarToggle} />
             <C.Header>
                 <C.container>
-                    <C.HamburgerIcon><FaBars /></C.HamburgerIcon>
+                    <C.HamburgerIcon onClick={handleSidebarToggle}><FaBars /></C.HamburgerIcon>
                     <C.NavbarBrand><a href="/inicio">Delivery Helper</a></C.NavbarBrand>
                     <C.MenuList>
                         <C.itemList><a href="/inicio">Acompanhar</a></C.itemList>
                         <C.itemList><a href="/lancamentos">Lançamentos</a></C.itemList>
-                        <C.itemList><a href="/metas">Metas</a></C.itemList>
                         <C.itemList><a href="#">Organização de gastos</a></C.itemList>
                     </C.MenuList>
                     <C.MenuAccount>

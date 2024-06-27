@@ -41,10 +41,10 @@ export const SiderbarHeaderContainer = styled.div`
 export const SidebarHeader = styled.h2`
     padding: 0 20px;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 1.5rem;
 
-    @media (max-width: 500px) {
-        font-size: 20px;
+    @media (max-width: 600px) {
+        font-size: 1.25rem;
     }
     `;
 
@@ -61,8 +61,7 @@ export const SidebarItemList = styled.li`
     align-items: center;
     font-weight: regular;
     font-family: 'Nunito Sans';
-    font-size: 16px;
-    /* margin-bottom: 25px; */
+    font-size: 1rem;
     color: #333;
     background-color: #fff;
     padding: 0 20px;
@@ -81,8 +80,8 @@ export const SidebarItemList = styled.li`
         background-color: #3D8FE7;
     }
 
-    @media (max-width: 500px) {
-        font-size: 14px;
+    @media (max-width: 600px) {
+        font-size: 0.875rem;
 
         &:hover {
         color: #333;
@@ -141,7 +140,7 @@ export const HamburgerIcon = styled.div`
 
 export const NavbarBrand = styled.h1`
     font-weight: bold;
-    font-size: 24px;
+    font-size: 1.5rem;
 
     a {
         text-decoration: none;
@@ -149,15 +148,15 @@ export const NavbarBrand = styled.h1`
     }
 
     @media (max-width: 1024px) {
-        font-size: 22px;
+        font-size: 1.375rem;
     }
 
     @media (max-width: 768px) {
-        font-size: 20px;
+        font-size: 1.25rem;
     }
 
     @media (max-width: 500px) {
-        font-size: 17px;
+        font-size: 1.125rem;
     }
 `;
 
@@ -175,7 +174,7 @@ export const MenuList = styled.ul`
 export const itemList = styled.li`
     font-family: 'Nunito Sans';
     font-weight: regular;
-    font-size: 16px;
+    font-size: 1rem;
     margin-right: 20px;
     color: #333;
 
@@ -200,7 +199,7 @@ export const Icon = styled.button`
     align-items: center;
     justify-content: center;
     border: none;
-    font-size: 23px;
+    font-size: 1.438rem;
     background-color: transparent;
     cursor: pointer;
 `;
@@ -240,7 +239,7 @@ export const DropdownItem = styled.li`
     list-style: none;
     margin-bottom: 5px;
     color: #272727;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 700;
     width: 100%;
     height: 30px;

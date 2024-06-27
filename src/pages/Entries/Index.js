@@ -131,6 +131,7 @@ const Index = () => {
       });
   };
 
+  console.log(userProfile);
   function addEntrie(data) {
     setLoading(true);
 
@@ -140,7 +141,9 @@ const Index = () => {
         initialKm: Number(data.initialKm),
         finalKm: Number(data.finalKm),
         grossGain: Number(data.value),
-        costPerKm: userProfile.totalCostPerKm
+        costPerKm: userProfile.totalCostPerKm,
+        gasolinePrice: userProfile.costPerKm[0].gasolina.value,
+        gasolineExpense: (data.finalKm - data.initialKm) * (userProfile.costPerKm[0].gasolina.value / userProfile.costPerKm[0].gasolina.km)
     };
 
     const id = toast.loading("Por favor espere...")

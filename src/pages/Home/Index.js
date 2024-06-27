@@ -58,10 +58,16 @@ const Home = () => {
     ? filterEntriesByDate(userProfile.entries, selectedWeek.startDate, selectedWeek.endDate)
     : userProfile.entries);
 
-  const totalCostPerKm = userProfile && filteredEntries[0] ? filteredEntries[0].costPerKm : '';
+    function calculateTotalExpense() {
+      return userProfile && filteredEntries.reduce((total, obj) => {
+        return total + (obj.kmTraveled * obj.costPerKm);
+      }, 0);
+    }
+  
+    const expense = calculateTotalExpense();
+
   const totalGrossGain = userProfile && filteredEntries.reduce((total, obj) => total + obj.grossGain, 0);
   const kmTraveled = userProfile && filteredEntries.reduce((total, obj) => total + (obj.finalKm - obj.initialKm), 0);
-  const expense = kmTraveled * Number(totalCostPerKm);
   const totalLiquidGain = totalGrossGain - expense;
 
   let salary = userProfile && Math.min(totalLiquidGain, userProfile.goals[0].salaryLimit);
@@ -87,7 +93,7 @@ const Home = () => {
           </C.GridCards>
           <C.MainContainer>
             <SummaryBox userProfile={userProfile} totalGrossGain={userProfile && totalGrossGain} kmTraveled={kmTraveled} expense={expense} totalLiquidGain={totalLiquidGain} />
-            <MaintenanceBox userProfile={userProfile} costPerKm={userProfile && userProfile.costPerKm[0]} kmTraveled={kmTraveled} />
+            <MaintenanceBox userProfile={userProfile} filteredEntries={filteredEntries} costPerKm={userProfile && userProfile.costPerKm[0]} kmTraveled={kmTraveled} />
           </C.MainContainer>
         </C.CardContainer>
       </C.Content>

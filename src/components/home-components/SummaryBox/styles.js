@@ -40,12 +40,12 @@ export const Container = styled.div`
 
 export const Header = styled.h2`
     color: rgba(0, 0, 0, 0.54);
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     margin-bottom: 50px;
 
-    @media (max-width: 500px) {
-        font-size: 15px;
+    @media (max-width: 600px) {
+        font-size: 1.063rem;
     }
 `;
 
@@ -55,13 +55,10 @@ export const List = styled.ul`
     align-items: start;
     flex-direction: column;
     gap: 25px 0;
-    /* background-color: red; */
 `;
 
 export const Item = styled.li`
     list-style: none;
-    /* font-size: 18px; */
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -73,15 +70,15 @@ export const Item = styled.li`
 
 export const Title = styled.span`
     @media (max-width: 500px) {
-        font-size: 12px;
+        font-size: 0.813rem;
     }
 `;
 
 export const Value = styled.span`
     color: rgba(0, 0, 0, 0.54);
-    font-size: 18px;
+    font-size: 1.125rem;
 
     @media (max-width: 500px) {
-        font-size: 12px;
+        font-size: 0.875rem;
     }
 `;

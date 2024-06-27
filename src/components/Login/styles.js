@@ -10,7 +10,7 @@ export const LoginContainer = styled.div`
     position: relative;
 
     @media (max-width: 520px) {
-        width: 430px;
+        width: 370px;
         padding: 10px;
         padding-top: 30px;
         padding-bottom: 50px;
@@ -20,11 +20,11 @@ export const LoginContainer = styled.div`
 export const Brand = styled.h1`
     font-family: 'Nunito Sans';
     font-weight: bold;
-    font-size: 26px;
+    font-size: 1.625rem;
     margin-bottom: 20px;
 
     @media (max-width: 580px) {
-        font-size: 22px;
+        font-size: 1.375rem;
     }
 `;
 
@@ -38,11 +38,11 @@ export const LoginHeader = styled.div`
 
 export const LoginHeaderTitle = styled.h2`
     font-family: 'Nunito Sans';
-    font-size: 22px;
+    font-size: 1.375rem;
     font-weight: 400;
 
     @media (max-width: 580px) {
-        font-size: 18px;
+        font-size: 1.125rem;
     }
 `;
 
@@ -59,11 +59,11 @@ export const FormField = styled.div`
 `;
 
 export const FormLabel = styled.label`
-    font-size: 16px;
+    font-size: 1rem;
     margin-bottom: 10px;
 
     @media (max-width: 580px) {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 `;
 
@@ -75,21 +75,21 @@ export const FormInput = styled.input`
     border-radius: 10px;
     outline: none;
     text-indent: 15px;
-    font-size: 14px;
+    font-size: 0.875rem;
 
     @media (max-width: 580px) {
-        font-size: 12px;
+        font-size: 0.813rem;
     }
 
     &::placeholder {
         @media (max-width: 580px) {
-            font-size: 12px;
+            font-size: 0.813rem;
         }
     }
 `;
 
 export const Link = styled.a`
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #3D8FE7;
 
     &:hover {
@@ -97,7 +97,7 @@ export const Link = styled.a`
     }
 
     @media (max-width: 580px) {
-        font-size: 12px;
+        font-size: 0.813rem;
     }
 `;
 
@@ -109,7 +109,7 @@ export const LoginButton = styled.button`
     height: 50px;
     background-color: #3D8FE7;
     color: #fff;
-    font-size: 20px;
+    font-size: 1.25rem;
     border: none;
     border-radius: 10px;
     margin: 10px 0;
@@ -131,7 +131,7 @@ export const LoginButton = styled.button`
     }
 
     @media (max-width: 580px) {
-        font-size: 17px;
+        font-size: 1.063rem;
 
         &:hover {
             background-color: #3D8FE7;
@@ -147,22 +147,22 @@ export const errorContainer = styled.div`
     display: block;
     align-items: center;
     justify-content: start;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: red;
     margin-bottom: 10px;
 
     @media (max-width: 580px) {
-        font-size: 12px;
+        font-size: 0.813rem;
     }
 `;
 
 export const LoginInfo = styled.div`
     span {
-        font-size: 14px;
-        margin-right: 10px;
+        font-size: 0.875rem;
+        margin-right: 5px;
 
         @media (max-width: 580px) {
-        font-size: 12px;
+        font-size: 0.813rem;
     }
     }
 `;

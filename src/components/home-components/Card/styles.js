@@ -24,18 +24,21 @@ export const Container = styled.div`
 export const Header = styled.p`
     color: rgba(0, 0, 0, 0.54);
     margin-bottom: 10px;
+    font-size: 1rem;
 
-    @media screen and (max-width: 500px) {
-        font-size: 13px;
+    @media screen and (max-width: 600px) {
+        /* font-size: 13px; */
+        font-size: 0.938rem;
     }
 `;
 
 export const Value = styled.h5`
     color: rgba(0, 0, 0, 0.87);
-    font-size: 24px;
+    /* font-size: 24px; */
+    font-size: 1.25rem;
     font-weight: 500;
 
-    @media screen and (max-width: 500px) {
-        font-size: 17px;
+    @media screen and (max-width: 600px) {
+        font-size: 1.125rem;
     }
 `;

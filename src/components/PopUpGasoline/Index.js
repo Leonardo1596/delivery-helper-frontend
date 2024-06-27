@@ -34,7 +34,6 @@ const Index = ({ updateGasolineValue, handleClosePopup, loading, setLoading }) =
 
     async function handleButton() {
         setLoading(true);
-        console.log('chegou aqui');
         if (formValues.value === 0) {
             return;
         }

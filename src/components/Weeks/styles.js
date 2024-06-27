@@ -51,12 +51,12 @@ export const DropdownButton = styled.button`
   background-color: transparent;
   color: #333333;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1rem;
   border: none;
   cursor: pointer;
 
   @media (max-width: 580px) {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 `;
 
@@ -81,6 +81,6 @@ export const DropdownItem = styled.a`
   }
 
   @media (max-width: 500px) {
-        font-size: 13px;
+        font-size: 0.875rem;
     }
 `;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const WeekContainer = styled.div`
-    width: 100vw;
+    width: 100%;
     margin-bottom: 30px;
     font-family: 'Nunito Sans';
 `;

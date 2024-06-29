@@ -61,6 +61,7 @@ export const MainContainer = styled.div`
     }
 
     @media (max-width: 600px) {
+        display: flex;
         flex-direction: column;
         align-items: center;
         gap: 15px;

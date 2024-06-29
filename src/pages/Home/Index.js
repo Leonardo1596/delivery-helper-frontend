@@ -8,6 +8,7 @@ import Weeks from '../../components/Weeks/Index';
 import Card from '../../components/home-components/Card/Index';
 import SummaryBox from '../../components/home-components/SummaryBox/Index';
 import MaintenanceBox from '../../components/home-components/MaintenanceBox/Index';
+import PersonalExpense from '../../components/home-components/PersonalExpense/Index';
 
 const Home = () => {
   const userId = useSelector((state) => state.handleSetUserId);
@@ -70,6 +71,11 @@ const Home = () => {
   const kmTraveled = userProfile && filteredEntries.reduce((total, obj) => total + (obj.finalKm - obj.initialKm), 0);
   const totalLiquidGain = totalGrossGain - expense;
 
+  // Filters personal expenses if a week is selected
+  const filteredPersonalExpenses = userProfile && (selectedWeek ? filterEntriesByDate(userProfile.personalExpense, selectedWeek.startDate, selectedWeek.endDate) : userProfile.personalExpense);
+  const personalDistanceTravelled = userProfile && filteredPersonalExpenses.reduce((total, obj) => total + obj.distance, 0);
+
+
   let salary = userProfile && Math.min(totalLiquidGain, userProfile.goals[0].salaryLimit);
   let remaining = totalLiquidGain - salary;
 
@@ -94,6 +100,7 @@ const Home = () => {
           <C.MainContainer>
             <SummaryBox userProfile={userProfile} totalGrossGain={userProfile && totalGrossGain} kmTraveled={kmTraveled} expense={expense} totalLiquidGain={totalLiquidGain} />
             <MaintenanceBox userProfile={userProfile} filteredEntries={filteredEntries} costPerKm={userProfile && userProfile.costPerKm[0]} kmTraveled={kmTraveled} />
+            <PersonalExpense userProfile={userProfile} personalDistanceTravelled={personalDistanceTravelled} filteredPersonalExpenses={filteredPersonalExpenses} costPerKm={userProfile && userProfile.costPerKm[0]} />
           </C.MainContainer>
         </C.CardContainer>
       </C.Content>

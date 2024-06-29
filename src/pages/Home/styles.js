@@ -48,9 +48,12 @@ export const GridCards = styled.div`
 
 export const MainContainer = styled.div`
     width: 1157px;
-    display: flex;
+    /* display: flex;
     align-items: start;
-    justify-content: space-between;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     margin-bottom: 30px;
 
     @media (max-width: 1200px) {

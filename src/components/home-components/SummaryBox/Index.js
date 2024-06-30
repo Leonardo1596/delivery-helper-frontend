@@ -3,7 +3,7 @@ import * as C from './styles';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-const Index = ({ userProfile, totalGrossGain, kmTraveled, expense, totalLiquidGain }) => {
+const Index = ({ userProfile, totalGrossGain, kmTraveled, foodExpense, expense, totalLiquidGain }) => {
     return (
         <div>
             <C.Box>
@@ -29,7 +29,13 @@ const Index = ({ userProfile, totalGrossGain, kmTraveled, expense, totalLiquidGa
                             </C.Value>
                         </C.Item>
                         <C.Item>
-                            <C.Title>Gasto</C.Title>
+                            <C.Title>Gasto com lanche</C.Title>
+                            <C.Value>
+                                {userProfile ? `R$ ${foodExpense.toFixed(2).replace('.', ',')}` : <Skeleton style={{ borderRadius: '5px' }} width={100} />}
+                            </C.Value>
+                        </C.Item>
+                        <C.Item>
+                            <C.Title>Gasto total</C.Title>
                             <C.Value>
                                 {userProfile ? `R$ ${expense.toFixed(2).replace('.', ',')}` : <Skeleton style={{ borderRadius: '5px' }} width={100} />}
                             </C.Value>

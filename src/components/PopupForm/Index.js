@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import * as C from './styles';
-import axios from 'axios';
 import { FaXmark } from "react-icons/fa6";
 import gifLoading from '../../assets/gif/loading-gif.gif';
 
@@ -14,6 +13,7 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
     const [formValues, setFormValues] = useState({
         initialKm: '',
         finalKm: '',
+        foodExpense: '',
         value: 0,
         date: formattedDate
     });
@@ -75,6 +75,10 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
                         <C.FormField>
                             <C.Label>Km final</C.Label>
                             <C.Input type='number' id='finalKm' value={formValues.finalKm} onChange={handleChange} />
+                        </C.FormField>
+                        <C.FormField>
+                            <C.Label>Gasto com lanche</C.Label>
+                            <C.Input type='number' id='foodExpense' value={formValues.foodExpense} onChange={handleChange} />
                         </C.FormField>
                         <C.FormField>
                             <C.Label>Ganho</C.Label>

@@ -131,7 +131,7 @@ const Index = () => {
       });
   };
 
-  console.log(userProfile);
+  // Add entrie
   function addEntrie(data) {
     setLoading(true);
 
@@ -142,6 +142,7 @@ const Index = () => {
         finalKm: Number(data.finalKm),
         grossGain: Number(data.value),
         costPerKm: userProfile.totalCostPerKm,
+        foodExpense: Number(data.foodExpense),
         gasolinePrice: userProfile.costPerKm[0].gasolina.value,
         gasolineExpense: (data.finalKm - data.initialKm) * (userProfile.costPerKm[0].gasolina.value / userProfile.costPerKm[0].gasolina.km)
     };

@@ -13,7 +13,7 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
     const [formValues, setFormValues] = useState({
         initialKm: '',
         finalKm: '',
-        foodExpense: '',
+        valueFoodExpense: 0,
         value: 0,
         date: formattedDate
     });
@@ -48,6 +48,19 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
         }));
     };
 
+    const handleFoodExpenseChange = (event) => {
+        const valueFoodExpense = event.target.value;
+        const numericValue = parseFloat(valueFoodExpense.replace(/[^\d]/g, '')) / 100;
+        const formattedValue = formatCurrency(valueFoodExpense);
+        const formattedValueWithComma = formattedValue.replace('.', ',');
+
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            valueFoodExpense: numericValue.toFixed(2),
+            formattedValueFoodExpense: formattedValueWithComma,
+        }));
+    };
+
     function handleButton() {
         setLoading(true);
         addEntrie(formValues);
@@ -78,7 +91,16 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
                         </C.FormField>
                         <C.FormField>
                             <C.Label>Gasto com lanche</C.Label>
-                            <C.Input type='number' id='foodExpense' value={formValues.foodExpense} onChange={handleChange} />
+                            {/* <C.Input type='number' id='foodExpense' value={formValues.foodExpense} onChange={handleChange} /> */}
+                            <C.Input
+                                type='text'
+                                style={{ caretColor: 'transparent' }}
+                                autoComplete="off"
+                                placeholder='R$ 0,00'
+                                id='valueFoodExpense'
+                                value={formValues.formattedValueFoodExpense}
+                                onChange={handleFoodExpenseChange}
+                            />
                         </C.FormField>
                         <C.FormField>
                             <C.Label>Ganho</C.Label>

@@ -142,7 +142,7 @@ const Index = () => {
         finalKm: Number(data.finalKm),
         grossGain: Number(data.value),
         costPerKm: userProfile.totalCostPerKm,
-        foodExpense: Number(data.foodExpense),
+        foodExpense: Number(data.valueFoodExpense),
         gasolinePrice: userProfile.costPerKm[0].gasolina.value,
         gasolineExpense: (data.finalKm - data.initialKm) * (userProfile.costPerKm[0].gasolina.value / userProfile.costPerKm[0].gasolina.km)
     };

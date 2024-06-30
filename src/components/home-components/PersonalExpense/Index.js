@@ -15,7 +15,7 @@ const Index = ({ userProfile, personalDistanceTravelled,  filteredPersonalExpens
         <div>
             <C.Box>
                 <C.Container>
-                    <C.Header>Gasto de manutenção pessoal</C.Header>
+                    <C.Header>Gastos de manutenção pessoal</C.Header>
                     <C.List>
                         <C.Item>
                             <C.Title>Óleo</C.Title>

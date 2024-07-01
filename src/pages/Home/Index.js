@@ -93,10 +93,10 @@ const Home = () => {
         <C.CardContainer>
           <Weeks onSelectWeek={handleSelectWeek} />
           <C.GridCards>
-            <Card userProfile={userProfile} title="Salário" value={userProfile && salary.toFixed(2).replace('.', ',')} />
-            <Card userProfile={userProfile} title="Meta 1" value={userProfile && goal1.toFixed(2).replace('.', ',')} />
-            <Card userProfile={userProfile} title="Meta 2" value={userProfile && goal2.toFixed(2).replace('.', ',')} />
-            <Card userProfile={userProfile} title="Restante" value={userProfile && remaining.toFixed(2).replace('.', ',')} />
+            <Card userProfile={userProfile} title="Salário" value={userProfile && 'R$ ' + salary.toFixed(2).replace('.', ',')} />
+            <Card userProfile={userProfile} title="Meta 1" value={userProfile && userProfile.goals[0].goal1Limit !== 0 ? 'R$ ' + goal1.toFixed(2).replace('.', ',') : '----'} />
+            <Card userProfile={userProfile} title="Meta 2" value={userProfile && userProfile.goals[0].goal2Limit !== 0 ? 'R$ ' + goal2.toFixed(2).replace('.', ',') : '----'} />
+            <Card userProfile={userProfile} title="Restante" value={userProfile && 'R$ ' + remaining.toFixed(2).replace('.', ',')} />
           </C.GridCards>
           <C.MainContainer>
             <SummaryBox userProfile={userProfile} totalGrossGain={userProfile && totalGrossGain} kmTraveled={kmTraveled} foodExpense={foodExpense} expense={expense} totalLiquidGain={totalLiquidGain} />

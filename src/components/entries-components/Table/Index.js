@@ -41,7 +41,7 @@ const Index = ({ userProfile, tableData, handleShowConfirmPopup }) => {
                         <tr key={index}>
                             <C.TableCell>{item.weekDay}</C.TableCell>
                             <C.TableCell>{formatDate(item.date)}</C.TableCell>
-                            <C.TableCell>{item.kmTraveled} km</C.TableCell>
+                            <C.TableCell>{item.kmTraveled.toFixed(1)} km</C.TableCell>
                             <C.TableCell>R$ {item.grossGain.toFixed(2).replace('.', ',')}</C.TableCell>
                             <C.TableCell>R$ {item.liquidGain.toFixed(2).replace('.', ',')}</C.TableCell>
                             <C.TableCell>R$ {item.spent.toFixed(2).replace('.', ',')}</C.TableCell>

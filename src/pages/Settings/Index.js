@@ -78,7 +78,7 @@ const Index = () => {
     }
 
     const id = toast.loading("Por favor espere...")
-    axios.put(`http://localhost:8000/goal/update/${userId}/${userProfile.goals[0]._id}`, body)
+    axios.put(`https://delivery-helper-backend.onrender.com/goal/update/${userId}/${userProfile.goals[0]._id}`, body)
       .then(response => {
         // console.log(response.data);
         // window.location.href = '/configuracoes'

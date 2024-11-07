@@ -14,6 +14,7 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
         initialKm: '',
         finalKm: '',
         valueFoodExpense: 0,
+        valueOtherExpenses: 0,
         value: 0,
         date: formattedDate
     });
@@ -61,6 +62,19 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
         }));
     };
 
+    const handleOtherExpensesChange = (event) => {
+        const valueOtherExpenses = event.target.value;
+        const numericValue = parseFloat(valueOtherExpenses.replace(/[^\d]/g, '')) / 100;
+        const formattedValue = formatCurrency(valueOtherExpenses);
+        const formattedValueWithComma = formattedValue.replace('.', ',');
+
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            valueOtherExpenses: numericValue.toFixed(2),
+            formattedValueOtherExpenses: formattedValueWithComma,
+        }));
+    };
+
     function handleButton() {
         setLoading(true);
         addEntrie(formValues);
@@ -91,7 +105,6 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
                         </C.FormField>
                         <C.FormField>
                             <C.Label>Gasto com lanche</C.Label>
-                            {/* <C.Input type='number' id='foodExpense' value={formValues.foodExpense} onChange={handleChange} /> */}
                             <C.Input
                                 type='text'
                                 style={{ caretColor: 'transparent' }}
@@ -100,6 +113,18 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
                                 id='valueFoodExpense'
                                 value={formValues.formattedValueFoodExpense}
                                 onChange={handleFoodExpenseChange}
+                            />
+                        </C.FormField>
+                        <C.FormField>
+                            <C.Label>Outros gastos</C.Label>
+                            <C.Input
+                                type='text'
+                                style={{ caretColor: 'transparent' }}
+                                autoComplete="off"
+                                placeholder='R$ 0,00'
+                                id='valueOtherExpenses'
+                                value={formValues.formattedValueOtherExpenses}
+                                onChange={handleOtherExpensesChange}
                             />
                         </C.FormField>
                         <C.FormField>
@@ -126,4 +151,4 @@ const Index = ({ addEntrie, handleClosePopupForm, loading, setLoading }) => {
     )
 }
 
-export default Index
+export default Index;

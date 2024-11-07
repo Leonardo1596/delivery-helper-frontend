@@ -25,7 +25,7 @@ const Index = () => {
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
 
   function getUserInfo() {
-    axios.get(`https://delivery-helper-backend.onrender.com/get/user/${userId}`)
+    axios.get(`http://localhost:8000/get/user/${userId}`)
       .then(response => {
         // console.log(response.data);
         setUserProfile(response.data);
@@ -86,7 +86,7 @@ const Index = () => {
   const hanleDeleteEntry = () => {
     if (itemToDelete) {
       const id = toast.loading("Por favor espere...")
-      axios.delete(`https://delivery-helper-backend.onrender.com/entry/delete/${userProfile._id}/${itemToDelete._id}`)
+      axios.delete(`http://localhost:8000/entry/delete/${userProfile._id}/${itemToDelete._id}`)
         .then(response => {
           getUserInfo();
           setShowConfirmPopup(false);
@@ -103,7 +103,7 @@ const Index = () => {
 
     // Get costPerKm
     let costPerKm;
-    await axios.get(`https://delivery-helper-backend.onrender.com/get/costPerKm/${userProfile.costPerKm[0]._id}`)
+    await axios.get(`http://localhost:8000/get/costPerKm/${userProfile.costPerKm[0]._id}`)
       .then(response => {
         costPerKm = response.data;
       });
@@ -118,7 +118,7 @@ const Index = () => {
     let updatedCostPerKm = updateGasolinaValue(costPerKm, data)
 
     const id = toast.loading("Por favor espere...")
-    axios.put(`https://delivery-helper-backend.onrender.com/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, updatedCostPerKm)
+    axios.put(`http://localhost:8000/cost_per_km/update/${userProfile._id}/${userProfile.costPerKm[0]._id}`, updatedCostPerKm)
       .then(response => {
         // console.log(response.data)
         getUserInfo();
@@ -135,6 +135,8 @@ const Index = () => {
   function addEntrie(data) {
     setLoading(true);
 
+    console.log(userProfile.totalCostPerKm);
+
     let body = {
         userId: userProfile._id,
         date: data.date,
@@ -143,12 +145,13 @@ const Index = () => {
         grossGain: Number(data.value),
         costPerKm: userProfile.totalCostPerKm,
         foodExpense: Number(data.valueFoodExpense),
+        otherExpense: Number(data.valueOtherExpenses),
         gasolinePrice: userProfile.costPerKm[0].gasolina.value,
         gasolineExpense: (data.finalKm - data.initialKm) * (userProfile.costPerKm[0].gasolina.value / userProfile.costPerKm[0].gasolina.km)
     };
 
     const id = toast.loading("Por favor espere...")
-    axios.post('https://delivery-helper-backend.onrender.com/entry/create', body)
+    axios.post('http://localhost:8000/entry/create', body)
         .then(response => {
             getUserInfo();
             handleClosePopupForm();
